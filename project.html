@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熠达通 - 项目管理</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary:#1a1a2e; --secondary:#16213e; --accent:#e94560; --accent-light:#ff6b6b; --gold:#d4a574; --cream:#faf8f5; --text-dark:#1a1a2e; --text-light:#6b7280; --white:#ffffff; --success:#10b981; --warning:#f59e0b; --info:#3b82f6; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Sans SC',sans-serif; background:var(--cream); color:var(--text-dark); min-height:100vh; }
+        .header { background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .logo { display:flex; align-items:center; gap:12px; }
+        .logo-icon { width:42px; height:42px; background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%); border-radius:10px; display:flex; align-items:center; justify-content:center; }
+        .logo-text { color:white; font-size:1.5rem; font-weight:700; letter-spacing:2px; }
+        .logo-text span { color:var(--gold); }
+        .header-nav { display:flex; gap:2rem; }
+        .header-nav a { color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.9rem; transition:color 0.3s; }
+        .header-nav a:hover, .header-nav a.active { color:var(--gold); }
+        .user-avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--gold) 0%,#c49a6c 100%); display:flex; align-items:center; justify-content:center; color:var(--primary); font-weight:700; font-size:0.9rem; }
+        
+        .main-container { display:flex; min-height:calc(100vh - 70px); }
+        .sidebar { width:260px; background:white; border-right:1px solid rgba(0,0,0,0.08); padding:1.5rem 0; }
+        .sidebar-title { font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); padding:0 1.5rem; margin-bottom:0.75rem; }
+        .sidebar-menu { list-style:none; }
+        .sidebar-menu li a { display:flex; align-items:center; gap:10px; padding:0.75rem 1.5rem; color:var(--text-dark); text-decoration:none; font-size:0.9rem; transition:all 0.3s; border-left:3px solid transparent; }
+        .sidebar-menu li a:hover { background:rgba(233,69,96,0.05); color:var(--accent); }
+        .sidebar-menu li a.active { background:rgba(233,69,96,0.08); color:var(--accent); border-left-color:var(--accent); font-weight:500; }
+        
+        .content { flex:1; padding:2rem; overflow-y:auto; }
+        .page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
+        .page-title { font-size:1.5rem; font-weight:700; color:var(--primary); }
+        .page-subtitle { color:var(--text-light); font-size:0.9rem; margin-top:0.25rem; }
+        
+        .btn { padding:0.625rem 1.25rem; border-radius:8px; font-size:0.9rem; font-weight:500; cursor:pointer; border:none; transition:all 0.3s; display:inline-flex; align-items:center; gap:0.5rem; }
+        .btn-primary { background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%); color:white; }
+        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(233,69,96,0.3); }
+        .btn-outline { background:white; border:1px solid #e5e7eb; color:var(--text-dark); }
+        .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+        
+        .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:2rem; }
+        .stat-card { background:white; border-radius:12px; padding:1.25rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); display:flex; align-items:center; gap:1rem; }
+        .stat-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
+        .stat-info { flex:1; }
+        .stat-value { font-size:1.5rem; font-weight:700; color:var(--primary); }
+        .stat-label { font-size:0.8rem; color:var(--text-light); }
+        
+        .card { background:white; border-radius:16px; padding:1.5rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); margin-bottom:1.5rem; }
+        .card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; }
+        .card-title { font-size:1.1rem; font-weight:600; color:var(--primary); }
+        
+        .project-list { display:flex; flex-direction:column; gap:1rem; }
+        .project-item { display:flex; justify-content:space-between; align-items:center; padding:1.25rem; background:#f9fafb; border-radius:12px; transition:all 0.3s; cursor:pointer; border:2px solid transparent; }
+        .project-item:hover { border-color:var(--accent); background:#fff; }
+        .project-info { flex:1; }
+        .project-name { font-weight:600; color:var(--primary); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; }
+        .project-badge { padding:0.2rem 0.5rem; background:var(--accent); color:white; border-radius:4px; font-size:0.7rem; }
+        .project-badge.warning { background:var(--warning); }
+        .project-badge.success { background:var(--success); }
+        .project-meta { display:flex; gap:1.5rem; font-size:0.85rem; color:var(--text-light); }
+        .project-actions { display:flex; gap:0.5rem; }
+        
+        .filter-bar { display:flex; gap:1rem; margin-bottom:1.5rem; }
+        .filter-btn { padding:0.5rem 1rem; background:white; border:1px solid #e5e7eb; border-radius:8px; font-size:0.85rem; cursor:pointer; }
+        .filter-btn:hover, .filter-btn.active { background:var(--accent); color:white; border-color:var(--accent); }
+        
+        /* Modal */
+        .modal { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); display:none; align-items:center; justify-content:center; z-index:1000; }
+        .modal.show { display:flex; }
+        .modal-content { background:white; border-radius:16px; padding:2rem; width:90%; max-width:600px; max-height:90vh; overflow-y:auto; }
+        .modal-header { font-size:1.25rem; font-weight:600; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; }
+        .modal-close { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-light); }
+        .form-group { margin-bottom:1rem; }
+        .form-group label { display:block; font-size:0.9rem; font-weight:500; margin-bottom:0.5rem; }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:0.75rem; border:1px solid #e5e7eb; border-radius:8px; font-size:0.95rem; font-family:inherit; }
+        .form-group textarea { min-height:100px; resize:vertical; }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .modal-actions { display:flex; gap:1rem; justify-content:flex-end; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #e5e7eb; }
+        
+        .toast { position:fixed; bottom:2rem; right:2rem; background:var(--primary); color:white; padding:1rem 1.5rem; border-radius:10px; z-index:9999; display:none; }
+        .toast.show { display:block; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="26" height="26" viewBox="0 0 100 100"><path d="M25 75 L50 40 L75 75" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="40" r="6" fill="white"/></svg>
+            </div>
+            <div class="logo-text">熠达<span>通</span></div>
+        </div>
+        <nav class="header-nav">
+            <a href="index.html">工作台</a>
+            <a href="bidinfo.html">招标信息</a>
+            <a href="project.html" class="active">项目管理</a>
+            <a href="document.html">标书管理</a>
+        </nav>
+        <div class="user-avatar">方</div>
+    </header>
+    
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="sidebar-title">项目管理</div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" onclick="filterProjects('all');return false;"><span>📋</span> 全部项目</a></li>
+                <li><a href="#" onclick="filterProjects('in_progress');return false;"><span>🔄</span> 进行中</a></li>
+                <li><a href="#" onclick="filterProjects('pending');return false;"><span>⏳</span> 待投标</a></li>
+                <li><a href="#" onclick="filterProjects('completed');return false;"><span>✅</span> 已完成</a></li>
+            </ul>
+            <div class="sidebar-title" style="margin-top:1.5rem;">快捷入口</div>
+            <ul class="sidebar-menu">
+                <li><a href="bidinfo.html"><span>🔍</span> 招标信息</a></li>
+                <li><a href="document.html"><span>📄</span> 标书制作</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">项目管理</h1>
+                    <p class="page-subtitle">管理所有投标项目，从招标到中标全流程跟踪</p>
+                </div>
+                <button class="btn btn-primary" onclick="openNewProjectModal()">➕ 新建项目</button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:rgba(233,69,96,0.1);">📁</div>
+                    <div class="stat-info"><div class="stat-value" id="totalCount">0</div><div class="stat-label">总项目数</div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:rgba(245,158,11,0.1);">🔄</div>
+                    <div class="stat-info"><div class="stat-value" id="inProgressCount">0</div><div class="stat-label">进行中</div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:rgba(59,130,246,0.1);">⏳</div>
+                    <div class="stat-info"><div class="stat-value" id="pendingCount">0</div><div class="stat-label">待投标</div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background:rgba(16,185,129,0.1);">💰</div>
+                    <div class="stat-info"><div class="stat-value" id="budgetSum">0</div><div class="stat-label">总预算(万)</div></div>
+                </div>
+            </div>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterProjects('all')">全部</button>
+                <button class="filter-btn" onclick="filterProjects('in_progress')">进行中</button>
+                <button class="filter-btn" onclick="filterProjects('pending')">待投标</button>
+                <button class="filter-btn" onclick="filterProjects('completed')">已完成</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">项目列表</h2>
+                    <span id="projectCount">0 个项目</span>
+                </div>
+                <div class="project-list" id="projectList"></div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- New Project Modal -->
+    <div class="modal" id="newProjectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                新建项目
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="form-group">
+                <label>项目名称 *</label>
+                <input type="text" id="projectName" placeholder="例如：2026成都国际车展特装展台">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>项目类型</label>
+                    <select id="projectType">
+                        <option value="exhibition">展览展示</option>
+                        <option value="booth">展台搭建</option>
+                        <option value="event">活动策划</option>
+                        <option value="showroom">品牌展厅</option>
+                        <option value="government">政府项目</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>客户名称</label>
+                    <input type="text" id="clientName" placeholder="客户/甲方名称">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>预算金额(万)</label>
+                    <input type="text" id="budget" placeholder="如：80-120">
+                </div>
+                <div class="form-group">
+                    <label>投标截止日期</label>
+                    <input type="date" id="deadline">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>项目地点</label>
+                <input type="text" id="location" placeholder="如：上海 · 国家会展中心">
+            </div>
+            <div class="form-group">
+                <label>招标要求（从招标文件复制粘贴）</label>
+                <textarea id="requirements" placeholder="请粘贴招标文件中关于设计、施工、工期等要求..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>备注</label>
+                <textarea id="notes" placeholder="其他补充信息..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModal()">取消</button>
+                <button class="btn btn-primary" onclick="createProject()">创建项目</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="project.js"></script>
+</body>
+</html>

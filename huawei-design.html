@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>熠达通 - 华为展厅设计方案</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root { --primary:#1a1a2e; --secondary:#16213e; --accent:#e94560; --gold:#d4a574; --cream:#faf8f5; --text-dark:#1a1a2e; --text-light:#6b7280; --white:#ffffff; --success:#10b981; --huawei-red:#CF0A2C; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans SC',sans-serif; background:var(--cream); color:var(--text-dark); }
+.header { background:linear-gradient(135deg,var(--primary),var(--secondary)); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+.logo { display:flex; align-items:center; gap:12px; }
+.logo-icon { width:42px; height:42px; background:linear-gradient(135deg,var(--accent),#ff6b6b); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:white; }
+.logo-text { color:white; font-size:1.5rem; font-weight:700; }
+.logo-text span { color:var(--gold); }
+.back-btn { background:rgba(255,255,255,0.1); color:white; border:none; padding:0.6rem 1.2rem; border-radius:8px; cursor:pointer; font-size:0.9rem; }
+.container { max-width:1400px; margin:0 auto; padding:2rem; }
+.page-title { font-size:1.75rem; font-weight:700; margin-bottom:0.5rem; }
+.page-subtitle { color:var(--text-light); margin-bottom:2rem; }
+.progress-bar { display:flex; align-items:center; gap:0; margin-bottom:2rem; background:white; padding:1rem; border-radius:12px; }
+.progress-step { flex:1; text-align:center; padding:0.75rem; border-radius:8px; cursor:pointer; transition:all 0.3s; }
+.progress-step:hover { background:var(--cream); }
+.progress-step.active { background:var(--accent); color:white; }
+.progress-step.completed { background:rgba(16,185,129,0.1); color:var(--success); }
+.step-icon { font-size:1.5rem; margin-bottom:0.25rem; }
+.step-name { font-weight:600; font-size:0.9rem; }
+.progress-arrow { color:var(--text-light); font-size:1.25rem; padding:0 0.5rem; }
+.content-section { display:none; }
+.content-section.active { display:block; }
+.canvas-container { background:white; border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; }
+.canvas-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+.canvas-title { font-size:1.1rem; font-weight:600; }
+.canvas-tools { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.tool-btn { padding:0.5rem 1rem; border:1px solid rgba(0,0,0,0.1); background:white; border-radius:8px; cursor:pointer; font-size:0.85rem; transition:all 0.2s; }
+.tool-btn:hover { border-color:var(--accent); }
+.tool-btn.active { background:var(--accent); color:white; border-color:var(--accent); }
+.canvas-wrapper { position:relative; background:#fffef5; border-radius:12px; overflow:hidden; aspect-ratio:16/10; }
+canvas { width:100%; height:100%; cursor:crosshair; }
+.color-palette { position:absolute; top:1rem; left:1rem; display:flex; gap:0.5rem; flex-wrap:wrap; z-index:10; }
+.color-btn { width:32px; height:32px; border-radius:50%; border:3px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.2); cursor:pointer; transition:transform 0.2s; }
+.color-btn:hover { transform:scale(1.15); }
+.color-btn.active { box-shadow:0 0 0 3px var(--accent); }
+.top-tools { position:absolute; top:1rem; right:1rem; display:flex; gap:0.5rem; align-items:center; z-index:10; }
+.size-slider { width:100px; }
+.action-btn { padding:0.5rem 1rem; border-radius:8px; font-size:0.85rem; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+.action-btn.secondary { background:rgba(233,69,96,0.1); border:1px solid var(--accent); color:var(--accent); }
+.action-btn.primary { background:var(--accent); color:white; border:none; }
+.hint-bar { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%); font-size:0.85rem; color:var(--text-light); background:rgba(255,255,255,0.95); padding:0.5rem 1.25rem; border-radius:20px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+.render-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:1rem; }
+.render-card { aspect-ratio:16/10; border-radius:12px; overflow:hidden; position:relative; cursor:pointer; transition:all 0.3s; }
+.render-card:hover { transform:scale(1.02); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+.render-card.active { border:3px solid var(--accent); }
+.render-bg { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:4rem; }
+.render-overlay { position:absolute; bottom:0; left:0; right:0; padding:0.75rem; background:linear-gradient(transparent,rgba(0,0,0,0.8)); color:white; }
+.render-type { font-size:0.7rem; color:var(--gold); margin-bottom:0.25rem; }
+.render-name { font-weight:600; font-size:0.9rem; }
+.main-render { aspect-ratio:16/9; border-radius:12px; overflow:hidden; position:relative; background:linear-gradient(135deg,#1a1a2e,#16213e); }
+.render-placeholder { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; }
+.render-icon { font-size:5rem; margin-bottom:1rem; }
+.render-text { font-size:1.25rem; font-weight:600; margin-bottom:0.5rem; }
+.render-hint { font-size:0.9rem; opacity:0.7; }
+.render-controls { position:absolute; bottom:1rem; left:50%; transform:translateX(-50%); display:flex; gap:0.5rem; background:rgba(0,0,0,0.5); padding:0.5rem 1rem; border-radius:25px; }
+.control-btn { width:36px; height:36px; border:none; background:rgba(255,255,255,0.2); border-radius:50%; color:white; cursor:pointer; font-size:1rem; transition:all 0.2s; }
+.control-btn:hover { background:rgba(255,255,255,0.3); }
+.video-container { position:relative; border-radius:12px; overflow:hidden; aspect-ratio:16/9; background:#0a0a15; }
+.video-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; background:rgba(0,0,0,0.4); transition:opacity 0.3s; }
+.play-btn { width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,0.2); border:3px solid white; cursor:pointer; font-size:2.5rem; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+.play-btn:hover { background:rgba(255,255,255,0.3); transform:scale(1.1); }
+.video-duration { margin-top:1rem; font-size:0.9rem; opacity:0.9; }
+.video-progress { position:absolute; bottom:0; left:0; right:0; height:4px; background:rgba(255,255,255,0.2); }
+.video-progress-bar { height:100%; background:var(--accent); width:0%; transition:width 0.1s; }
+.timeline { background:white; border-radius:12px; padding:1rem; margin-top:1rem; }
+.timeline-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; }
+.timeline-title { font-size:0.9rem; font-weight:600; }
+.timeline-track { position:relative; height:50px; background:var(--cream); border-radius:8px; overflow:hidden; }
+.keyframe { position:absolute; top:8px; width:6px; height:34px; background:var(--accent); border-radius:3px; cursor:pointer; }
+.keyframe:hover { background:#ff6b6b; }
+.keyframe-time { position:absolute; bottom:2px; font-size:0.65rem; color:var(--text-light); transform:translateX(-50%); }
+.playhead { position:absolute; top:0; width:2px; height:100%; background:var(--gold); z-index:10; }
+.generate-section { background:linear-gradient(135deg,var(--primary),var(--secondary)); border-radius:12px; padding:1.5rem; color:white; margin-top:1rem; }
+.generate-title { font-weight:600; margin-bottom:0.5rem; }
+.generate-desc { font-size:0.9rem; opacity:0.8; margin-bottom:1rem; }
+.generate-btn { padding:0.75rem 2rem; background:white; color:var(--primary); border:none; border-radius:10px; font-size:0.95rem; font-weight:600; cursor:pointer; }
+.generate-btn:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+.info-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:1rem; }
+.info-card { background:var(--cream); border-radius:12px; padding:1rem; text-align:center; }
+.info-value { font-size:1.25rem; font-weight:700; color:var(--primary); }
+.info-label { font-size:0.8rem; color:var(--text-light); }
+@media (max-width:768px) { .render-grid, .info-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header class="header">
+<div class="logo"><div class="logo-icon">📋</div><div class="logo-text">熠达<span>通</span></div></div>
+<div style="display:flex;gap:1rem;">
+<button class="back-btn" onclick="location.href='design.html'">← 返回</button>
+<button class="back-btn" style="background:var(--accent);" onclick="location.href='index.html'">🏠 首页</button>
+</div>
+</header>
+<div class="container">
+<h1 class="page-title">🎨 华为新品发布会展厅设计方案</h1>
+<p class="page-subtitle">项目：HW-2026-001 | 面积：800-1000㎡ | 预算：200万+ | 阶段：方案深化</p>
+<div class="progress-bar">
+<div class="progress-step active" onclick="goToStep(1)"><div class="step-icon">✏️</div><div class="step-name">手稿方案</div></div>
+<div class="progress-arrow">→</div>
+<div class="progress-step" onclick="goToStep(2)"><div class="step-icon">💻</div><div class="step-name">3D效果图</div></div>
+<div class="progress-arrow">→</div>
+<div class="progress-step" onclick="goToStep(3)"><div class="step-icon">🎬</div><div class="step-name">漫游视频</div></div>
+</div>
+<div id="step1" class="content-section active">
+<div class="canvas-container">
+<div class="canvas-header">
+<div class="canvas-title">📐 手稿方案 - 平面布局</div>
+<div class="canvas-tools">
+<button class="tool-btn active" onclick="setTool('pen',this)">✏️ 画笔</button>
+<button class="tool-btn" onclick="setTool('line',this)">╱ 直线</button>
+<button class="tool-btn" onclick="setTool('rect',this)">▭ 矩形</button>
+</div>
+</div>
+<div class="canvas-wrapper">
+<canvas id="sketchCanvas"></canvas>
+<div class="color-palette">
+<button class="color-btn active" style="background:#1a1a2e;" onclick="setColor('#1a1a2e',this)"></button>
+<button class="color-btn" style="background:#e94560;" onclick="setColor('#e94560',this)"></button>
+<button class="color-btn" style="background:#3b82f6;" onclick="setColor('#3b82f6',this)"></button>
+<button class="color-btn" style="background:#10b981;" onclick="setColor('#10b981',this)"></button>
+<button class="color-btn" style="background:#CF0A2C;" onclick="setColor('#CF0A2C',this)"></button>
+<button class="color-btn" style="background:white;border:2px solid #ddd;" onclick="setColor('white',this)">橡</button>
+</div>
+<div class="top-tools">
+<input type="range" class="size-slider" id="brushSize" min="1" max="20" value="3" oninput="brushSize=parseInt(this.value)">
+<button class="action-btn secondary" onclick="clearSketch()">清空</button>
+<button class="action-btn primary" onclick="alert('✅ 手稿已保存！')">保存</button>
+</div>
+<div class="hint-bar">✏️ 华为展厅平面布局 - 已预置示例方案</div>
+</div>
+</div>
+<button class="action-btn primary" style="width:100%;padding:1rem;font-size:1rem;" onclick="goToStep(2)">下一步：3D效果图 →</button>
+</div>
+<div id="step2" class="content-section">
+<div class="canvas-container">
+<div class="canvas-title">🖼️ 3D效果图展示</div>
+<div class="render-grid">
+<div class="render-card active" onclick="selectScene('entrance',this)"><div class="render-bg" style="background:linear-gradient(135deg,#667eea,#764ba2);">🚪</div><div class="render-overlay"><div class="render-type">效果图</div><div class="render-name">入口形象区</div></div></div>
+<div class="render-card" onclick="selectScene('product',this)"><div class="render-bg" style="background:linear-gradient(135deg,#f093fb,#f5576c);">📱</div><div class="render-overlay"><div class="render-type">效果图</div><div class="render-name">产品展示区</div></div></div>
+<div class="render-card" onclick="selectScene('interactive',this)"><div class="render-bg" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">🎮</div><div class="render-overlay"><div class="render-type">效果图</div><div class="render-name">互动体验区</div></div></div>
+<div class="render-card" onclick="selectScene('stage',this)"><div class="render-bg" style="background:linear-gradient(135deg,#fa709a,#fee140);">🎭</div><div class="render-overlay"><div class="render-type">效果图</div><div class="render-name">发布舞台</div></div></div>
+<div class="render-card" onclick="selectScene('vip',this)"><div class="render-bg" style="background:linear-gradient(135deg,#a8edea,#fed6e3);">☕</div><div class="render-overlay"><div class="render-type">效果图</div><div class="render-name">VIP洽谈区</div></div></div>
+<div class="render-card" onclick="selectScene('night',this)"><div class="render-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">🌙</div><div class="render-overlay"><div class="render-type">效果图</div><div class="render-name">夜景效果</div></div></div>
+</div>
+<div class="main-render"><canvas id="renderCanvas"></canvas>
+<div class="render-placeholder" id="renderPlaceholder"><div class="render-icon">🏢</div><div class="render-text" id="renderTitle">入口形象区 - 效果图</div><div class="render-hint">点击上方卡片切换场景 | 实时渲染</div></div>
+<div class="render-controls">
+<button class="control-btn" onclick="rotateLeft()">←</button>
+<button class="control-btn" onclick="rotateRight()">→</button>
+<button class="control-btn" onclick="zoomIn()">+</button>
+<button class="control-btn" onclick="zoomOut()">−</button>
+<button class="control-btn" onclick="alert('已下载效果图！')">⬇</button>
+</div>
+</div>
+</div>
+<button class="action-btn primary" style="width:100%;padding:1rem;font-size:1rem;" onclick="goToStep(3)">下一步：漫游视频 →</button>
+</div>
+<div id="step3" class="content-section">
+<div class="canvas-container">
+<div class="canvas-title">🎬 展厅漫游视频</div>
+<div class="video-container">
+<canvas id="videoCanvas"></canvas>
+<div class="video-overlay" id="videoOverlay">
+<button class="play-btn" onclick="playVideo()">▶</button>
+<div class="video-duration">点击播放 | 时长 2:30</div>
+</div>
+<div class="video-progress"><div class="video-progress-bar" id="progressBar"></div></div>
+</div>
+<div class="timeline">
+<div class="timeline-header"><div class="timeline-title">📹 时间轴 - 关键帧</div></div>
+<div class="timeline-track">
+<div class="keyframe" style="left:5%;"><div class="keyframe-time" style="left:50%;">0:05</div></div>
+<div class="keyframe" style="left:25%;"><div class="keyframe-time" style="left:50%;">0:35</div></div>
+<div class="keyframe" style="left:50%;"><div class="keyframe-time" style="left:50%;">1:15</div></div>
+<div class="keyframe" style="left:75%;"><div class="keyframe-time" style="left:50%;">1:55</div></div>
+<div class="keyframe" style="left:95%;"><div class="keyframe-time" style="left:50%;">2:25</div></div>
+<div class="playhead" id="playhead" style="left:0%;"></div>
+</div>
+</div>
+<div class="info-grid">
+<div class="info-card"><div class="info-value">2:30</div><div class="info-label">时长</div></div>
+<div class="info-card"><div class="info-value">4K</div><div class="info-label">分辨率</div></div>
+<div class="info-card"><div class="info-value">60fps</div><div class="info-label">帧率</div></div>
+<div class="info-card"><div class="info-value">5个</div><div class="info-label">镜头</div></div>
+</div>
+<div class="generate-section">
+<div class="generate-title">🎬 生成高清漫游视频</div>
+<div class="generate-desc">AI将根据设计方案自动生成4K 60fps漫游动画</div>
+<button class="generate-btn" id="generateBtn" onclick="generateVideo()">🚀 开始生成视频</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+let currentColor='#1a1a2e', brushSize=3, isDrawing=false;
+let sketchCtx, renderCtx, videoCtx;
+let rotation=0, zoom=1;
+function goToStep(s){
+document.querySelectorAll('.content-section').forEach(x=>x.classList.remove('active'));
+document.getElementById('step'+s).classList.add('active');
+document.querySelectorAll('.progress-step').forEach((x,i)=>{x.classList.remove('active','completed');if(i+1<s)x.classList.add('completed');if(i+1===s)x.classList.add('active');});
+if(s===2)initRender();if(s===3)initVideo();
+}
+function initSketch(){
+const c=document.getElementById('sketchCanvas'), w=c.parentElement;
+c.width=w.offsetWidth; c.height=w.offsetHeight;
+sketchCtx=c.getContext('2d');
+drawPreset();
+c.onmousedown=e=>{isDrawing=true;sketchCtx.beginPath();sketchCtx.moveTo(e.offsetX,e.offsetY);};
+c.onmousemove=e=>{if(!isDrawing)return;sketchCtx.strokeStyle=currentColor;sketchCtx.lineWidth=brushSize;sketchCtx.lineCap='round';sketchCtx.lineTo(e.offsetX,e.offsetY);sketchCtx.stroke();sketchCtx.beginPath();sketchCtx.moveTo(e.offsetX,e.offsetY);};
+c.onmouseup=()=>isDrawing=false;c.onmouseleave=()=>isDrawing=false;
+}
+function drawPreset(){
+const w=sketchCtx.canvas.width, h=sketchCtx.canvas.height;
+sketchCtx.fillStyle='#fffef5';sketchCtx.fillRect(0,0,w,h);
+sketchCtx.strokeStyle='#1a1a2e';sketchCtx.lineWidth=2;sketchCtx.strokeRect(80,60,w-160,h-120);
+sketchCtx.fillStyle='rgba(207,10,44,0.1)';sketchCtx.fillRect(80,60,120,h-120);
+sketchCtx.strokeStyle='#CF0A2C';sketchCtx.strokeRect(80,60,120,h-120);
+sketchCtx.fillStyle='#CF0A2C';sketchCtx.font='12px "Noto Sans SC"';
+sketchCtx.fillText('入口形象区',95,h/2-15);sketchCtx.fillText('8m形象墙',95,h/2);
+sketchCtx.beginPath();sketchCtx.arc(w/2,h/2,100,0,Math.PI*2);
+sketchCtx.strokeStyle='#3b82f6';sketchCtx.stroke();
+sketchCtx.fillStyle='rgba(59,130,246,0.1)';sketchCtx.fill();
+sketchCtx.fillStyle='#3b82f6';sketchCtx.fillText('产品展示区',w/2-30,h/2-5);sketchCtx.fillText('环形布局',w/2-20,h/2+15);
+sketchCtx.fillStyle='rgba(16,185,129,0.1)';sketchCtx.fillRect(w-280,100,160,120);
+sketchCtx.strokeStyle='#10b981';sketchCtx.strokeRect(w-280,100,160,120);
+sketchCtx.fillStyle='#10b981';sketchCtx.fillText('互动体验区',w-260,155);sketchCtx.fillText('VR/AR',w-255,175);
+sketchCtx.fillStyle='rgba(245,158,11,0.1)';sketchCtx.fillRect(w-280,h-220,160,80);
+sketchCtx.strokeStyle='#f59e0b';sketchCtx.strokeRect(w-280,h-220,160,80);
+sketchCtx.fillStyle='#f59e0b';sketchCtx.fillText('发布舞台',w-255,h-185);sketchCtx.fillText('270°环幕',w-260,h-165);
+sketchCtx.fillStyle='rgba(212,165,116,0.1)';sketchCtx.fillRect(250,h-150,180,70);
+sketchCtx.strokeStyle='#d4a574';sketchCtx.strokeRect(250,h-150,180,70);
+sketchCtx.fillStyle='#d4a574';sketchCtx.fillText('VIP洽谈区',310,h-120);
+sketchCtx.setLineDash([5,5]);sketchCtx.strokeStyle='#6b7280';
+sketchCtx.beginPath();sketchCtx.moveTo(150,h/2);sketchCtx.lineTo(w/2-120,h/2);sketchCtx.stroke();
+sketchCtx.beginPath();sketchCtx.moveTo(w/2+120,h/2);sketchCtx.lineTo(w-280,h/2);sketchCtx.stroke();
+sketchCtx.setLineDash([]);
+sketchCtx.font='bold 14px "Noto Sans SC"';sketchCtx.fillStyle='#1a1a2e';
+sketchCtx.fillText('华为新品发布会展厅 - 平面布局方案',w/2-110,40);
+}
+function setColor(c,b){currentColor=c;document.querySelectorAll('.color-btn').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');}
+function setTool(t,b){document.querySelectorAll('.canvas-tools .tool-btn').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');}
+function clearSketch(){drawPreset();}
+function initRender(){
+const c=document.getElementById('renderCanvas'),w=c.parentElement;
+c.width=w.offsetWidth;c.height=w.offsetHeight;
+renderCtx=c.getContext('2d');
+drawRender('entrance');
+}
+function drawRender(scene){
+const w=renderCtx.canvas.width,h=renderCtx.canvas.height;
+const g=renderCtx.createLinearGradient(0,0,w,h);
+g.addColorStop(0,'#1a1a2e');g.addColorStop(1,'#16213e');
+renderCtx.fillStyle=g;renderCtx.fillRect(0,0,w,h);
+renderCtx.save();
+renderCtx.translate(w/2,h/2);renderCtx.rotate(rotation);renderCtx.scale(zoom,zoom);renderCtx.translate(-w/2,-h/2);
+renderCtx.strokeStyle='rgba(255,255,255,0.1)';renderCtx.lineWidth=1;
+for(let i=0;i<20;i++){renderCtx.beginPath();renderCtx.moveTo(i*w/20,h);renderCtx.lineTo(w/2+(i-10)*30,h*0.3);renderCtx.stroke();}
+renderCtx.fillStyle='rgba(207,10,44,0.3)';renderCtx.beginPath();renderCtx.ellipse(w/2,h*0.5,150,80,0,0,Math.PI*2);renderCtx.fill();
+renderCtx.fillStyle='rgba(255,255,255,0.1)';
+for(let i=0;i<5;i++){renderCtx.beginPath();renderCtx.arc(100+i*(w-200)/4,h*0.7,30,0,Math.PI*2);renderCtx.fill();}
+renderCtx.restore();
+renderCtx.fillStyle='white';renderCtx.font='bold 24px "Noto Sans SC"';renderCtx.textAlign='center';
+renderCtx.fillText('华为展厅 - '+scene.toUpperCase(),w/2,50);
+}
+function selectScene(s,card){
+document.querySelectorAll('.render-card').forEach(x=>x.classList.remove('active'));if(card)card.classList.add('active');
+const names={entrance:'入口形象区',product:'产品展示区',interactive:'互动体验区',stage:'发布舞台',vip:'VIP洽谈区',night:'夜景效果'};
+document.getElementById('renderTitle').textContent=names[s]+' - 效果图';
+if(renderCtx)drawRender(s);
+}
+function rotateLeft(){rotation-=0.1;if(renderCtx)drawRender('entrance');}
+function rotateRight(){rotation+=0.1;if(renderCtx)drawRender('entrance');}
+function zoomIn(){zoom*=1.1;if(renderCtx)drawRender('entrance');}
+function zoomOut(){zoom*=0.9;if(renderCtx)drawRender('entrance');}
+function initVideo(){
+const c=document.getElementById('videoCanvas'),w=c.parentElement;
+c.width=w.offsetWidth;c.height=w.offsetHeight;
+videoCtx=c.getContext('2d');
+drawVideoFrame(0);
+}
+function drawVideoFrame(p){
+const w=videoCtx.canvas.width,h=videoCtx.canvas.height;
+const g=videoCtx.createLinearGradient(0,0,w,h);
+g.addColorStop(0,'#0a0a15');g.addColorStop(1,'#1a1a2e');
+videoCtx.fillStyle=g;videoCtx.fillRect(0,0,w,h);
+const off=p*w;
+videoCtx.strokeStyle='rgba(207,10,44,0.3)';videoCtx.lineWidth=2;
+for(let i=0;i<10;i++){videoCtx.beginPath();videoCtx.moveTo((off+i*150)%w,0);videoCtx.lineTo((off+i*150)%w+100,h);videoCtx.stroke();}
+videoCtx.fillStyle='rgba(59,130,246,0.2)';
+videoCtx.beginPath();videoCtx.arc(w/2+Math.sin(p*10)*50,h/2,100+Math.sin(p*5)*20,0,Math.PI*2);videoCtx.fill();
+}
+let playing=false;
+function playVideo(){
+if(playing)return;
+playing=true;
+document.getElementById('videoOverlay').style.opacity='0';
+const start=Date.now(),dur=15000;
+function anim(){
+const e=Date.now()-start,p=e/dur;
+if(p>=1){playing=false;document.getElementById('videoOverlay').style.opacity='1';document.getElementById('progressBar').style.width='0%';document.getElementById('playhead').style.left='0%';return;}
+drawVideoFrame(p);
+document.getElementById('progressBar').style.width=(p*100)+'%';
+document.getElementById('playhead').style.left=(p*100)+'%';
+requestAnimationFrame(anim);
+}
+anim();
+}
+function generateVideo(){
+const b=document.getElementById('generateBtn');
+b.disabled=true;b.textContent='⏳ 生成中...';
+let p=0;
+const iv=setInterval(()=>{
+p+=Math.random()*8;
+if(p>=100){clearInterval(iv);b.textContent='✅ 视频已生成';alert('✅ 4K漫游视频已生成完成！\n\n文件：华为展厅漫游_4K.mp4\n大小：约180MB\n时长：2分30秒');}
+},200);
+}
+window.onload=initSketch;
+window.onresize=()=>{if(sketchCtx)initSketch();if(renderCtx)initRender();if(videoCtx)initVideo();};
+</script>
+</body>
+</html>

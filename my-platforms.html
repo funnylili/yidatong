@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的接单平台 - 熠达通</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; background: #0f0f1a; color: #fff; padding: 20px; min-height: 100vh; }
+.header { text-align: center; padding: 30px 0; }
+.header h1 { font-size: 28px; background: linear-gradient(135deg, #e94560, #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header p { color: #888; margin-top: 10px; font-size: 14px; }
+.wechat-bar { background: linear-gradient(135deg, #e94560, #ff6b6b); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 30px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.wechat-bar .label { font-size: 14px; opacity: 0.8; }
+.wechat-bar .id { font-size: 28px; font-weight: 700; margin-top: 5px; letter-spacing: 2px; }
+.wechat-bar .tip { font-size: 12px; opacity: 0.6; margin-top: 8px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; max-width: 1000px; margin: 0 auto; }
+.card { background: #1a1a2e; border-radius: 16px; padding: 24px; border: 1px solid #2a2a3e; transition: all 0.3s; cursor: pointer; text-decoration: none; color: #fff; display: block; }
+.card:hover { border-color: #e94560; transform: translateY(-4px); box-shadow: 0 8px 30px rgba(233,69,96,0.2); }
+.card .icon { font-size: 36px; margin-bottom: 12px; }
+.card .name { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.card .desc { font-size: 13px; color: #888; line-height: 1.6; }
+.card .status { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-top: 12px; }
+.status-done { background: #dcfce7; color: #16a34a; }
+.status-todo { background: #fef3c7; color: #d97706; }
+.status-running { background: #dbeafe; color: #2563eb; }
+.footer { text-align: center; margin-top: 40px; padding: 20px; color: #444; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>我的接单平台</h1>
+  <p>标书代写 · 投标服务 · 熠达通</p>
+</div>
+
+<div class="wechat-bar">
+  <div class="label">引流微信号</div>
+  <div class="id">微❤ funfun0</div>
+  <div class="tip">所有平台咨询统一引流到微❤</div>
+</div>
+
+<div class="grid">
+
+<a href="https://www.goofish.com" target="_blank" class="card">
+  <div class="icon">🐟</div>
+  <div class="name">闲鱼</div>
+  <div class="desc">客户主动找服务，转化率最高。搜索"标书代写"能被精准找到。</div>
+  <span class="status status-done">已发布</span>
+</a>
+
+<a href="https://creator.xiaohongshu.com" target="_blank" class="card">
+  <div class="icon">📕</div>
+  <div class="name">小红书</div>
+  <div class="desc">展示真实经历，有信任感。配合人设账号一起发。</div>
+  <span class="status status-done">已发布</span>
+</a>
+
+<a href="https://www.zbj.com" target="_blank" class="card">
+  <div class="icon">🐷</div>
+  <div class="name">猪八戒网</div>
+  <div class="desc">老牌威客平台，标书需求最多。需实名认证后接单。</div>
+  <span class="status status-todo">待注册</span>
+</a>
+
+<a href="https://www.epweike.com" target="_blank" class="card">
+  <div class="icon">🏆</div>
+  <div class="name">一品威客</div>
+  <div class="desc">类似猪八戒，竞争相对少。标书代写类目有稳定流量。</div>
+  <span class="status status-todo">待注册</span>
+</a>
+
+<a href="https://www.680.com" target="_blank" class="card">
+  <div class="icon">⏰</div>
+  <div class="name">时间财富网</div>
+  <div class="desc">威客平台，价格偏低。适合练手和积累初期评价。</div>
+  <span class="status status-todo">待注册</span>
+</a>
+
+<a href="https://www.douban.com" target="_blank" class="card">
+  <div class="icon">🔍</div>
+  <div class="name">豆瓣成都组</div>
+  <div class="desc">本地属性强，社群活跃。发帖+回帖引流到微信。</div>
+  <span class="status status-todo">待注册</span>
+</a>
+
+<a href="https://www.bbcyw.com" target="_blank" class="card">
+  <div class="icon">💡</div>
+  <div class="name">帮帮创意</div>
+  <div class="desc">设计+文案类威客平台。可接标书代写服务。</div>
+  <span class="status status-todo">待注册</span>
+</a>
+
+<a href="https://www.toubiao.la" target="_blank" class="card">
+  <div class="icon">📝</div>
+  <div class="name">投标啦</div>
+  <div class="desc">专业投标服务平台。精准对接投标需求用户。</div>
+  <span class="status status-todo">待注册</span>
+</a>
+
+<a href="index.html" target="_blank" class="card">
+  <div class="icon">🚀</div>
+  <div class="name">熠达通工作流</div>
+  <div class="desc">招投标全流程平台：招标信息→项目管理→方案设计→标书制作→投标提交</div>
+  <span class="status status-running">可用</span>
+</a>
+
+<a href="https://mail.qq.com" target="_blank" class="card">
+  <div class="icon">📧</div>
+  <div class="name">招标情报邮件</div>
+  <div class="desc">每天9:00自动推送。QQ邮箱 530085288@qq.com</div>
+  <span class="status status-running">运行中</span>
+</a>
+
+</div>
+
+<div class="footer">
+  熠达通 · 智能招投标助手 | 微❤ funfun0 | 2026年4月
+</div>
+</body>
+</html>

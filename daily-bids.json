@@ -1,0 +1,56 @@
+﻿{
+    "bids":  [
+                 {
+                     "source":  "千里马",
+                     "url":  "http://www.qianlima.com/gjxx/374720/index_25.html",
+                     "method":  "比选",
+                     "area":  "四川",
+                     "days":  9,
+                     "isHot":  true,
+                     "isMatch":  true,
+                     "money":  "24",
+                     "title":  "四川展会策划搭建招标采购"
+                 },
+                 {
+                     "url":  "https://www.bidcenter.com.cn/newscontent-13699292-1.html",
+                     "days":  9,
+                     "money":  "待确认",
+                     "title":  "农博会成都展场搭建服务招标公告",
+                     "isMatch":  true,
+                     "method":  "待确认",
+                     "source":  "采招网",
+                     "area":  "四川"
+                 },
+                 {
+                     "source":  "四川广播电视台",
+                     "url":  "https://www.sctv.com/announcement/2019349177071640577",
+                     "method":  "竞争性磋商",
+                     "area":  "四川",
+                     "days":  9,
+                     "isHot":  true,
+                     "isMatch":  true,
+                     "money":  "45",
+                     "title":  "2026年全国两会天府融媒智慧共享空间展陈搭建服务项目"
+                 },
+                 {
+                     "url":  "http://www.qianlima.com/gjxx/60211/index_25.html",
+                     "days":  9,
+                     "money":  "待确认",
+                     "title":  "四川展览设计展台搭建招标采购",
+                     "isMatch":  true,
+                     "method":  "竞价",
+                     "source":  "千里马",
+                     "area":  "四川"
+                 },
+                 {
+                     "url":  "http://www.qianlima.com/gjxx/52318/index_25_0.html",
+                     "source":  "千里马",
+                     "money":  "待确认",
+                     "method":  "待确认",
+                     "days":  9,
+                     "title":  "四川展览设计搭建招标公告",
+                     "area":  "四川"
+                 }
+             ],
+    "date":  "2026-04-28"
+}

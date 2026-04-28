@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>熠达通 - 招标信息</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#1a1a2e;--s:#16213e;--a:#e94560;--al:#ff6b6b;--g:#d4a574;--c:#faf8f5;--t:#6b7280;--w:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--c);min-height:100vh}
+.h{background:linear-gradient(135deg,var(--p),var(--s));padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.l{color:var(--w);font-size:1.5rem;font-weight:700}
+.l span{color:var(--g)}
+.n{display:flex;gap:2rem}
+.n a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.9rem}
+.n a:hover,.n a.active{color:var(--g)}
+.u{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g),#c49a6c);display:flex;align-items:center;justify-content:center;color:var(--p);font-weight:700}
+.m{display:flex;min-height:calc(100vh - 70px)}
+.sb{width:220px;background:var(--w);border-right:1px solid rgba(0,0,0,.08);padding:1.5rem 0;overflow-y:auto}
+.st{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--t);padding:0 1rem;margin-bottom:.5rem}
+.fl{list-style:none;margin-bottom:1rem}
+.fi{padding:.5rem 1rem;cursor:pointer;font-size:.9rem;border-radius:0}
+.fi:hover{background:#f5f5f5}
+.fi.active{background:rgba(233,69,96,.1);color:var(--a);font-weight:500}
+.pl{list-style:none;padding:0 1rem}
+.pl li{padding:.4rem 0;font-size:.8rem;color:var(--t)}
+.pl li a{color:var(--a);text-decoration:none}
+.pl li a:hover{text-decoration:underline}
+.ct{flex:1;padding:1.5rem;overflow-y:auto}
+.ss{background:var(--w);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.sr{display:flex;gap:.75rem;margin-bottom:.75rem}
+.si{flex:1;padding:.75rem 1rem;border:2px solid #e5e7eb;border-radius:10px;font-size:.95rem}
+.si:focus{outline:none;border-color:var(--a)}
+.bt{padding:.75rem 1.5rem;background:linear-gradient(135deg,var(--a),var(--al));color:var(--w);border:none;border-radius:10px;font-weight:500;cursor:pointer}
+.bt:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(233,69,96,.3)}
+.ft{display:flex;gap:.5rem;flex-wrap:wrap}
+.ft span{padding:.35rem .875rem;background:#f5f5f5;border-radius:20px;font-size:.8rem;cursor:pointer}
+.ft span:hover,.ft span.active{background:var(--a);color:var(--w)}
+.sg{grid-template-columns:repeat(4,1fr);display:grid;gap:1rem;margin-bottom:1.5rem}
+.sc{background:var(--w);border-radius:12px;padding:1rem;display:flex;align-items:center;gap:.75rem;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.sv{font-size:1.25rem;font-weight:700}
+.sl{font-size:.75rem;color:var(--t)}
+.bc{background:var(--w);border-radius:12px;padding:1.25rem;margin-bottom:1rem;cursor:pointer;border:2px solid transparent;transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.bc:hover{border-color:var(--a);transform:translateY(-3px)}
+.bh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;gap:.5rem}
+.bt2{font-size:1rem;font-weight:600;flex:1;line-height:1.4}
+.bt2:hover{color:var(--a)}
+.bg{padding:.2rem .5rem;border-radius:4px;font-size:.7rem;font-weight:500}
+.bg-n{background:#ecfdf5;color:#059669}
+.bg-h{background:#fef2f2;color:#dc2626}
+.bg-m{background:rgba(212,165,116,.15);color:var(--g)}
+.bm{grid-template-columns:repeat(4,1fr);gap:.75rem;padding:.75rem;background:#f9fafb;border-radius:8px;margin-bottom:.75rem;display:grid}
+.ml{font-size:.75rem;color:var(--t);margin-bottom:.2rem}
+.mv{font-size:.9rem;font-weight:600}
+.mv.money{color:var(--a)}
+.mv.urgent{color:#dc2626}
+.bf{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.btg{display:flex;gap:.5rem;flex-wrap:wrap}
+.bt3{padding:.2rem .5rem;background:#f5f5f5;border-radius:4px;font-size:.75rem;color:var(--t)}
+.ba{display:flex;gap:.5rem}
+.btn{padding:.5rem 1rem;border-radius:8px;font-size:.85rem;cursor:pointer;border:none}
+.btn-p{background:linear-gradient(135deg,var(--a),var(--al));color:var(--w)}
+.btn-o{background:var(--w);border:1px solid #e5e7eb;color:#333}
+.btn-o:hover{border-color:var(--a);color:var(--a)}
+.pg{display:flex;justify-content:center;gap:.5rem;margin-top:1.5rem}
+.pb{width:36px;height:36px;border:1px solid #e5e7eb;background:var(--w);border-radius:8px;cursor:pointer}
+.pb:hover,.pb.active{background:var(--a);color:var(--w);border-color:var(--a)}
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--p);color:var(--w);padding:1rem 1.5rem;border-radius:10px;z-index:9999;display:none}
+.toast.show{display:block}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000}
+.modal.show{display:flex}
+.mc{background:var(--w);border-radius:16px;padding:2rem;width:90%;max-width:500px}
+.mh{font-size:1.25rem;font-weight:600;margin-bottom:1.5rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:.9rem;margin-bottom:.5rem}
+.fg input,.fg textarea{width:100%;padding:.75rem;border:1px solid #e5e7eb;border-radius:8px;font-family:inherit}
+.ma{display:flex;gap:1rem;justify-content:flex-end;margin-top:1.5rem}
+.loading{text-align:center;padding:3rem;color:var(--t)}
+.loading .icon{font-size:2rem;margin-bottom:.5rem}
+.source-bar{background:var(--w);border-radius:12px;padding:1rem;margin-bottom:1.5rem;display:flex;gap:1rem;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.source-item{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:#f5f5f5;border-radius:8px;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;color:#333}
+.source-item:hover{background:var(--a);color:var(--w)}
+.source-item.active{background:var(--a);color:var(--w)}
+.source-item .count{background:var(--w);color:var(--a);padding:.1rem .4rem;border-radius:10px;font-size:.7rem;font-weight:700}
+.source-item:hover .count,.source-item.active .count{background:var(--w);color:var(--a)}
+</style></head>
+<body>
+<header class="h">
+<div class="l">熠达<span>通</span></div>
+<nav class="n">
+<a href="index.html">工作台</a>
+<a href="project.html">项目管理</a>
+<a href="bidinfo.html" class="active">招标信息</a>
+<a href="document.html">标书管理</a>
+</nav>
+<div class="u">方</div>
+</header>
+<div class="m">
+<aside class="sb">
+<div class="st">筛选条件</div>
+<ul class="fl">
+<li class="fi active" onclick="filterAll(this)" data-filter="all">全部信息</li>
+<li class="fi" onclick="filterAll(this)" data-filter="tender">招标公告</li>
+<li class="fi" onclick="filterAll(this)" data-filter="result">中标结果</li>
+<li class="fi" onclick="filterAll(this)" data-filter="change">变更公告</li>
+</ul>
+<div class="st">行业分类</div>
+<ul class="fl">
+<li class="fi active" onclick="filterIndustry(this)" data-industry="all">全部行业</li>
+<li class="fi" onclick="filterIndustry(this)" data-industry="exhibition">展览展示</li>
+<li class="fi" onclick="filterIndustry(this)" data-industry="booth">展台搭建</li>
+<li class="fi" onclick="filterIndustry(this)" data-industry="event">活动策划</li>
+<li class="fi" onclick="filterIndustry(this)" data-industry="showroom">品牌展厅</li>
+</ul>
+<div class="st">地区筛选</div>
+<ul class="fl">
+<li class="fi active" onclick="filterRegion(this)" data-region="all">全国</li>
+<li class="fi" onclick="filterRegion(this)" data-region="chengdu">成都</li>
+<li class="fi" onclick="filterRegion(this)" data-region="chongqing">重庆</li>
+<li class="fi" onclick="filterRegion(this)" data-region="kunming">昆明</li>
+<li class="fi" onclick="filterRegion(this)" data-region="beijing">北京</li>
+<li class="fi" onclick="filterRegion(this)" data-region="shanghai">上海</li>
+</ul>
+<div class="st">快捷入口</div>
+<ul class="pl">
+<li><a href="https://www.qianlima.com" target="_blank">千里马采购网 →</a></li>
+<li><a href="http://www.ccgp.gov.cn" target="_blank">政府采购网 →</a></li>
+<li><a href="https://www.scggzy.com" target="_blank">四川公共资源 →</a></li>
+<li><a href="https://www.suaee.com" target="_blank">西南产权交易所 →</a></li>
+<li><a href="https://www.gzggzy.cn" target="_blank">贵州公共资源 →</a></li>
+</ul>
+</aside>
+<main class="ct">
+<div class="ss">
+<div class="sr">
+<input type="text" class="si" id="searchInput" placeholder="搜索关键词：展览、搭建、活动策划..." onkeyup="if(event.key==='Enter')doSearch()">
+<button class="bt" onclick="doSearch()">搜索</button>
+</div>
+<div class="ft">
+<span class="active" onclick="filterTime(this)" data-time="all">全部</span>
+<span onclick="filterTime(this)" data-time="7">7天内截止</span>
+<span onclick="filterTime(this)" data-time="urgent">即将截止</span>
+<span onclick="filterTime(this)" data-time="50w">50万以上</span>
+</div>
+</div>
+
+<div class="source-bar">
+<div class="source-item active" onclick="switchSource('all',this)">
+<span>📋</span> 全部来源 <span class="count" id="countAll">0</span>
+</div>
+<div class="source-item" onclick="switchSource('qianlima',this)">
+<span>🏇</span> 千里马 <span class="count" id="countQianlima">0</span>
+</div>
+<div class="source-item" onclick="switchSource('ccgp',this)">
+<span>🏛️</span> 政府采购 <span class="count" id="countCcgp">0</span>
+</div>
+<div class="source-item" onclick="switchSource('scggzy',this)">
+<span>📡</span> 四川公共资源 <span class="count" id="countScggzy">0</span>
+</div>
+<div class="source-item" onclick="switchSource('suaee',this)">
+<span>💎</span> 西南产权 <span class="count" id="countSuaee">0</span>
+</div>
+</div>
+
+<div class="sg">
+<div class="sc"><div style="width:40px;height:40px;border-radius:10px;background:rgba(233,69,96,.1);display:flex;align-items:center;justify-content:center">📊</div><div><div class="sv" id="sTotal">0</div><div class="sl">总招标数</div></div></div>
+<div class="sc"><div style="width:40px;height:40px;border-radius:10px;background:rgba(16,185,129,.1);display:flex;align-items:center;justify-content:center">🎯</div><div><div class="sv" id="sMatch">0</div><div class="sl">高匹配</div></div></div>
+<div class="sc"><div style="width:40px;height:40px;border-radius:10px;background:rgba(245,158,11,.1);display:flex;align-items:center;justify-content:center">⏰</div><div><div class="sv" id="sUrgent">0</div><div class="sl">即将截止</div></div></div>
+<div class="sc"><div style="width:40px;height:40px;border-radius:10px;background:rgba(212,165,116,.1);display:flex;align-items:center;justify-content:center">💰</div><div><div class="sv" id="sMoney">0</div><div class="sl">总预算(万)</div></div></div>
+</div>
+
+<div id="bidList"><div class="loading"><div class="icon">⏳</div><div>正在加载招标信息...</div></div></div>
+
+<div class="pg">
+<button class="pb" onclick="changePage(-1)">‹</button>
+<button class="pb active" onclick="goPage(1)">1</button>
+<button class="pb" onclick="goPage(2)">2</button>
+<button class="pb" onclick="goPage(3)">3</button>
+<button class="pb" onclick="changePage(1)">›</button>
+</div>
+</main>
+</div>
+
+<div class="modal" id="projectModal">
+<div class="mc">
+<div class="mh">📁 创建项目</div>
+<div class="fg"><label>项目名称</label><input type="text" id="pName"></div>
+<div class="fg"><label>客户名称</label><input type="text" id="pClient" placeholder="甲方"></div>
+<div class="fg"><label>预算金额(万)</label><input type="text" id="pBudget"></div>
+<div class="fg"><label>投标截止日期</label><input type="date" id="pDeadline"></div>
+<div class="fg"><label>招标要求</label><textarea id="pReq" rows="4" placeholder="从招标公告复制重要要求..."></textarea></div>
+<div class="ma">
+<button class="btn btn-o" onclick="closeModal()">取消</button>
+<button class="btn btn-p" onclick="createProject()">创建并制作标书</button>
+</div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// 招标数据 - 来自真实平台示例
+const allBids = [
+{id:1,title:'2026成都国际汽车展览会特装展台设计搭建项目',type:'tender',industry:'exhibition',region:'chengdu',money:'80-120',deadline:'2026-04-25',location:'成都·中国西部国际博览城',tags:['展览展示','汽车行业','特装'],days:7,isHot:true,source:'qianlima',url:'https://www.qianlima.com'},
+{id:2,title:'华为终端2026新品发布会展厅设计搭建一体化服务',type:'tender',industry:'showroom',region:'shenzhen',money:'200+',deadline:'2026-04-20',location:'深圳',tags:['品牌展厅','科技数码','高端'],days:4,isMatch:true,source:'qianlima',url:'https://www.qianlima.com'},
+{id:3,title:'第二十届中国西部国际博览会展台搭建公开比选采购公告',type:'tender',industry:'booth',region:'chengdu',money:'120-180',deadline:'2026-04-22',location:'成都·西博城',tags:['西博会','展台搭建','比选'],days:6,isHot:true,isMatch:true,source:'ccgp',url:'http://www.ccgp.gov.cn'},
+{id:4,title:'四川省科学健身"坝坝会"服务供应商采购比选项目',type:'tender',industry:'event',region:'chengdu',money:'20-30',deadline:'2026-04-24',location:'成都',tags:['活动策划','比选','服务'],days:8,source:'scggzy',url:'https://www.scggzy.com'},
+{id:5,title:'2026重庆国际智能产业博览会特装展位设计搭建',type:'tender',industry:'exhibition',region:'chongqing',money:'150-200',deadline:'2026-04-28',location:'重庆·国际博览中心',tags:['智博会','特装','智能制造'],days:10,isMatch:true,source:'qianlima',url:'https://www.qianlima.com'},
+{id:6,title:'昆明南亚博览会东南亚主题展馆设计施工一体化',type:'tender',industry:'exhibition',region:'kunming',money:'60-80',deadline:'2026-05-01',location:'昆明·滇池国际会展中心',tags:['南博会','国际展览','设计施工'],days:13,source:'ccgp',url:'http://www.ccgp.gov.cn'},
+{id:7,title:'成都迪格展览展示常年供应商入库征集公告',type:'tender',industry:'exhibition',region:'chengdu',money:'入库',deadline:'2026-04-30',location:'成都',tags:['供应商入库','询价','长期合作'],days:12,source:'qianlima',url:'https://www.qianlima.com'},
+{id:8,title:'西南地区各类活动策划、舞美搭建常年供应商征集',type:'tender',industry:'event',region:'chengdu',money:'待确认',deadline:'2026-05-05',location:'成都/绵阳/宜宾',tags:['活动策划','舞美搭建','供应商'],days:17,source:'suaee',url:'https://www.suaee.com'},
+{id:9,title:'国家税务总局某省分局会议室改造设计施工项目',type:'tender',industry:'showroom',region:'beijing',money:'50-80',deadline:'2026-04-26',location:'北京',tags:['政府项目','会议室','改造'],days:8,isMatch:true,source:'ccgp',url:'http://www.ccgp.gov.cn'},
+{id:10,title:'2026上海进博会品牌展区设计搭建一体化服务',type:'tender',industry:'exhibition',region:'shanghai',money:'180-250',deadline:'2026-05-03',location:'上海·国家会展中心',tags:['进博会','品牌','特装'],days:15,isMatch:true,source:'qianlima',url:'https://www.qianlima.com'},
+{id:11,title:'某知名车企全国经销商年会活动策划执行供应商招标',type:'tender',industry:'event',region:'shanghai',money:'100-150',deadline:'2026-04-29',location:'全国',tags:['年会活动','策划执行','招标'],days:11,isHot:true,source:'qianlima',url:'https://www.qianlima.com'},
+{id:12,title:'成都某三甲医院新建院区导视系统设计制作安装',type:'tender',industry:'showroom',region:'chengdu',money:'30-50',deadline:'2026-05-08',location:'成都',tags:['导视系统','制作安装','医院'],days:20,source:'scggzy',url:'https://www.scggzy.com'},
+{id:13,title:'某省运会开闭幕式舞台搭建、灯光音响租赁服务采购',type:'tender',industry:'event',region:'chongqing',money:'200+',deadline:'2026-05-10',location:'重庆',tags:['体育赛事','舞台搭建','灯光音响'],days:22,isHot:true,isMatch:true,source:'ccgp',url:'http://www.ccgp.gov.cn'},
+{id:14,title:'某头部手机品牌新品首销门店美陈布置供应商招标',type:'tender',industry:'booth',region:'shenzhen',money:'80-100',deadline:'2026-04-23',location:'深圳/全国',tags:['门店美陈','布置','快闪'],days:5,isHot:true,source:'qianlima',url:'https://www.qianlima.com'},
+{id:15,title:'四川省文化旅游推介活动策划执行一体化服务采购',type:'tender',industry:'event',region:'chengdu',money:'60-90',deadline:'2026-05-12',location:'成都',tags:['文化旅游','策划执行','活动'],days:24,source:'scggzy',url:'https://www.scggzy.com'},
+];
+
+let curFilter = {type:'all',industry:'all',region:'all',time:'all',keyword:'',source:'all'};
+let curPage = 1;
+let curBid = null;
+
+document.addEventListener('DOMContentLoaded',()=>{
+    updateSourceCounts();
+    render();
+    updateStats();
+});
+
+function updateSourceCounts(){
+    document.getElementById('countAll').textContent = allBids.length;
+    document.getElementById('countQianlima').textContent = allBids.filter(b=>b.source==='qianlima').length;
+    document.getElementById('countCcgp').textContent = allBids.filter(b=>b.source==='ccgp').length;
+    document.getElementById('countScggzy').textContent = allBids.filter(b=>b.source==='scggzy').length;
+    document.getElementById('countSuaee').textContent = allBids.filter(b=>b.source==='suaee').length;
+}
+
+function switchSource(src,el){
+    curFilter.source = src;
+    curPage = 1;
+    document.querySelectorAll('.source-item').forEach(i=>i.classList.remove('active'));
+    el.classList.add('active');
+    render();
+}
+
+function filterAll(el){curFilter.type=el.dataset.filter;curPage=1;el.parentElement.querySelectorAll('.fi').forEach(i=>i.classList.remove('active'));el.classList.add('active');render()}
+function filterIndustry(el){curFilter.industry=el.dataset.industry;curPage=1;el.parentElement.querySelectorAll('.fi').forEach(i=>i.classList.remove('active'));el.classList.add('active');render()}
+function filterRegion(el){curFilter.region=el.dataset.region;curPage=1;el.parentElement.querySelectorAll('.fi').forEach(i=>i.classList.remove('active'));el.classList.add('active');render()}
+function filterTime(el){curFilter.time=el.dataset.time;curPage=1;el.parentElement.querySelectorAll('.ft span').forEach(i=>i.classList.remove('active'));el.classList.add('active');render()}
+
+function doSearch(){
+    curFilter.keyword = document.getElementById('searchInput').value.trim();
+    curPage = 1;
+    render();
+}
+
+function getFiltered(){
+    return allBids.filter(b=>{
+        if(curFilter.type!=='all'&&b.type!==curFilter.type)return false;
+        if(curFilter.industry!=='all'&&b.industry!==curFilter.industry)return false;
+        if(curFilter.region!=='all'&&b.region!==curFilter.region)return false;
+        if(curFilter.source!=='all'&&b.source!==curFilter.source)return false;
+        if(curFilter.keyword&&!b.title.toLowerCase().includes(curFilter.keyword.toLowerCase()))return false;
+        if(curFilter.time==='7'&&b.days>7)return false;
+        if(curFilter.time==='urgent'&&b.days>5)return false;
+        if(curFilter.time==='50w'&&(b.money==='入库'||b.money==='待确认'||parseInt(b.money)<50))return false;
+        return true;
+    });
+}
+
+function render(){
+    const filtered = getFiltered();
+    const perPage = 5;
+    const start = (curPage-1)*perPage;
+    const pageData = filtered.slice(start,start+perPage);
+    
+    if(pageData.length===0){
+        document.getElementById('bidList').innerHTML='<div style="text-align:center;padding:3rem;color:#6b7280"><div style="font-size:3rem;opacity:.3">🔍</div><p>未找到符合条件的招标信息</p></div>';
+        return;
+    }
+    
+    document.getElementById('bidList').innerHTML=pageData.map(b=>{
+        let badges='';
+        if(b.isNew)badges+='<span class="bg bg-n">NEW</span>';
+        if(b.isHot)badges+='<span class="bg bg-h">热门</span>';
+        if(b.isMatch)badges+='<span class="bg bg-m">匹配</span>';
+        
+        const sourceLabel={'qianlima':'千里马','ccgp':'政府采购','scggzy':'四川公共资源','suaee':'西南产权'}[b.source]||'其他';
+        
+        return '<div class="bc">'+
+            '<div class="bh">'+
+                '<div class="bt2"><a href="'+(b.url||'#')+'" target="_blank" style="color:inherit;text-decoration:none">'+b.title+'</a></div>'+
+                badges+
+            '</div>'+
+            '<div class="bm">'+
+                '<div><div class="ml">预算金额</div><div class="mv money">'+b.money+'万</div></div>'+
+                '<div><div class="ml">项目地点</div><div class="mv">'+b.location.split('·')[0]+'</div></div>'+
+                '<div><div class="ml">截止日期</div><div class="mv '+(b.days<=5?'urgent':'')+'">'+b.deadline+' ('+b.days+'天)</div></div>'+
+                '<div><div class="ml">来源平台</div><div class="mv">'+sourceLabel+'</div></div>'+
+            '</div>'+
+            '<div class="bf">'+
+                '<div class="btg">'+b.tags.map(t=>'<span class="bt3">'+t+'</span>').join('')+'</div>'+
+                '<div class="ba">'+
+                    '<a href="'+(b.url||'#')+'" target="_blank" class="btn btn-o">查看详情</a>'+
+                    '<button class="btn btn-p" onclick="openProject('+b.id+')">创建项目</button>'+
+                '</div>'+
+            '</div>'+
+        '</div>';
+    }).join('');
+}
+
+function updateStats(){
+    const filtered=allBids;
+    document.getElementById('sTotal').textContent=filtered.length;
+    document.getElementById('sMatch').textContent=filtered.filter(b=>b.isMatch||b.isHot).length;
+    document.getElementById('sUrgent').textContent=filtered.filter(b=>b.days<=7).length;
+    let total=0;
+    filtered.forEach(b=>{const m=parseInt(b.money);if(!isNaN(m))total+=m});
+    document.getElementById('sMoney').textContent=total;
+}
+
+function openProject(id){
+    curBid=allBids.find(b=>b.id===id);
+    document.getElementById('pName').value=curBid.title;
+    document.getElementById('pClient').value='';
+    document.getElementById('pBudget').value=curBid.money;
+    document.getElementById('pDeadline').value=curBid.deadline;
+    const req='【项目信息】\n来源：'+curBid.source+'\n地点：'+curBid.location+'\n预算：'+curBid.money+'万\n截止：'+curBid.deadline+'\n行业：'+curBid.industry+'\n【招标要求】\n请填写从招标公告中复制的具体要求...';
+    document.getElementById('pReq').value=req;
+    document.getElementById('projectModal').classList.add('show');
+}
+
+function closeModal(){document.getElementById('projectModal').classList.remove('show')}
+document.getElementById('projectModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+function createProject(){
+    const p={
+        id:Date.now(),
+        name:document.getElementById('pName').value,
+        client:document.getElementById('pClient').value,
+        budget:document.getElementById('pBudget').value,
+        deadline:document.getElementById('pDeadline').value,
+        requirements:document.getElementById('pReq').value,
+        status:'in_progress',
+        progress:10,
+        createdAt:new Date().toISOString()
+    };
+    let ps=JSON.parse(localStorage.getItem('yidatong_projects')||'[]');
+    ps.unshift(p);
+    localStorage.setItem('yidatong_projects',JSON.stringify(ps));
+    closeModal();
+    showToast('项目创建成功！');
+    setTimeout(()=>{window.location.href='document.html?project='+p.id+'&name='+encodeURIComponent(p.name)+'&requirements='+encodeURIComponent(p.requirements)},1000);
+}
+
+function changePage(d){
+    const total=Math.ceil(getFiltered().length/5);
+    curPage+=d;
+    if(curPage<1)curPage=1;
+    if(curPage>total)curPage=total;
+    render();
+    document.querySelectorAll('.pg .pb').forEach((b,i)=>{
+        b.classList.toggle('active',i===curPage);
+    });
+}
+function goPage(p){curPage=p;render();document.querySelectorAll('.pg .pb').forEach((b,i)=>{b.classList.toggle('active',i===p)});}
+
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+</script></body></html>

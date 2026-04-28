@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>熠达通 - 招投标工作台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#0d1117;color:#e6edf3;height:100vh;overflow:hidden}
+
+/* ============ 顶部导航 ============ */
+.topbar{
+  background:linear-gradient(135deg,#1a1a2e,#16213e,#0f0c29);
+  border-bottom:1px solid rgba(233,69,96,.3);
+  padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{
+  width:40px;height:40px;background:linear-gradient(135deg,#e94560,#ff6b6b);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 15px rgba(233,69,96,.4);
+}
+.logo-icon svg{width:24px;height:24px}
+.logo-text{font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:1px}
+.logo-text span{color:#e94560}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-date{color:rgba(255,255,255,.5);font-size:.85rem}
+.topbar-badge{
+  background:rgba(233,69,96,.2);border:1px solid rgba(233,69,96,.4);
+  color:#e94560;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;
+}
+.user-avatar{
+  width:36px;height:36px;background:linear-gradient(135deg,#d4a574,#e8c8a0);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1a1a2e;font-size:.9rem;
+}
+
+/* ============ 主体布局 ============ */
+.layout{display:flex;height:100vh;padding-top:60px}
+
+/* ============ 左侧边栏 ============ */
+.sidebar{
+  width:220px;background:#161b22;border-right:1px solid rgba(255,255,255,.06);
+  display:flex;flex-direction:column;flex-shrink:0;
+}
+.sidebar-nav{flex:1;padding:16px 0}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:12px 20px;
+  color:rgba(255,255,255,.6);cursor:pointer;transition:all .2s;
+  border-left:3px solid transparent;font-size:.95rem;
+  text-decoration:none;
+}
+.nav-item:hover{background:rgba(233,69,96,.1);color:#e94560;border-left-color:rgba(233,69,96,.5)}
+.nav-item.active{background:rgba(233,69,96,.15);color:#e94560;border-left-color:#e94560}
+.nav-item .icon{font-size:1.1rem;width:24px;text-align:center}
+.nav-item .arrow{margin-left:auto;font-size:.7rem;opacity:.4}
+.nav-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 16px}
+
+/* ============ 主内容区 ============ */
+.main{flex:1;overflow-y:auto;padding:28px}
+
+/* ============ 欢迎横幅 ============ */
+.hero-banner{
+  background:linear-gradient(135deg,rgba(233,69,96,.15),rgba(22,33,62,.8));
+  border:1px solid rgba(233,69,96,.2);border-radius:16px;
+  padding:28px 32px;margin-bottom:24px;position:relative;overflow:hidden;
+}
+.hero-banner::before{
+  content:'';position:absolute;top:-50%;right:-10%;
+  width:300px;height:300px;background:radial-gradient(circle,rgba(233,69,96,.1),transparent 70%);
+  pointer-events:none;
+}
+.hero-greeting{font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:6px}
+.hero-title{font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:4px}
+.hero-subtitle{color:rgba(255,255,255,.5);font-size:.9rem}
+.hero-stats{
+  display:flex;gap:32px;margin-top:20px;
+}
+.hero-stat{display:flex;flex-direction:column}
+.hero-stat .val{font-size:1.4rem;font-weight:800;color:#e94560}
+.hero-stat .lab{font-size:.75rem;color:rgba(255,255,255,.4)}
+
+/* ============ 工作流阶段 ============ */
+.section-title{
+  font-size:1rem;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+
+.workflow-stages{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;
+}
+.stage-card{
+  background:#161b22;border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:16px;cursor:pointer;transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.stage-card:hover{
+  border-color:rgba(233,69,96,.4);transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.stage-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#e94560,#ff6b6b);
+  opacity:0;transition:opacity .2s;
+}
+.stage-card:hover::before,.stage-card.active::before{opacity:1}
+.stage-card.active{border-color:rgba(233,69,96,.3)}
+.stage-icon{font-size:1.8rem;margin-bottom:10px}
+.stage-name{font-size:.85rem;font-weight:600;color:#fff;margin-bottom:4px}
+.stage-count{font-size:.75rem;color:rgba(255,255,255,.3)}
+.stage-badge{
+  position:absolute;top:10px;right:10px;
+  background:rgba(233,69,96,.2);color:#e94560;
+  font-size:.65rem;padding:2px 7px;border-radius:10px;font-weight:600;
+}
+
+/* ============ 快捷操作 ============ */
+.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.quick-btn{
+  background:#161b22;border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  text-decoration:none;color:inherit;
+}
+.quick-btn:hover{
+  border-color:rgba(233,69,96,.3);background:rgba(233,69,96,.08);
+  transform:translateY(-2px);
+}
+.quick-btn .q-icon{font-size:1.6rem}
+.quick-btn .q-label{font-size:.85rem;font-weight:600}
+.quick-btn .q-sub{font-size:.7rem;color:rgba(255,255,255,.3)}
+
+/* ============ 项目列表 ============ */
+.project-list{display:flex;flex-direction:column;gap:10px}
+.project-item{
+  background:#161b22;border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;
+  cursor:pointer;transition:all .2s;
+}
+.project-item:hover{border-color:rgba(233,69,96,.3)}
+.project-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+}
+.project-info{flex:1;min-width:0}
+.project-name{font-size:.9rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.project-meta{font-size:.75rem;color:rgba(255,255,255,.3);margin-top:2px}
+.project-progress{
+  width:120px;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;flex-shrink:0;
+}
+.project-progress-bar{height:100%;background:linear-gradient(90deg,#e94560,#ff6b6b);border-radius:3px;transition:width .5s}
+.project-status{
+  font-size:.75rem;padding:3px 10px;border-radius:10px;font-weight:600;flex-shrink:0;
+}
+
+/* ============ 紧急招标 ============ */
+.bid-list{display:flex;flex-direction:column;gap:10px}
+.bid-item{
+  background:#161b22;border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;
+  transition:all .2s;
+}
+.bid-item:hover{border-color:rgba(233,69,96,.3)}
+.bid-item-l{width:4px;height:40px;border-radius:2px;flex-shrink:0}
+.bid-item-info{flex:1;min-width:0}
+.bid-item-title{
+  font-size:.88rem;font-weight:600;color:#fff;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;
+}
+.bid-item-meta{font-size:.75rem;color:rgba(255,255,255,.3)}
+.bid-item-money{font-size:.9rem;font-weight:700;color:#e94560;flex-shrink:0}
+.bid-item-days{font-size:.75rem;color:rgba(255,255,255,.3);flex-shrink:0}
+
+/* ============ 底部状态 ============ */
+.status-bar{
+  border-top:1px solid rgba(255,255,255,.06);padding:12px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:.8rem;color:rgba(255,255,255,.3);
+  background:#161b22;margin:-28px;margin-top:28px;
+}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ============ 滚动条 ============ */
+.main::-webkit-scrollbar{width:6px}
+.main::-webkit-scrollbar-track{background:transparent}
+.main::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.main::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
+
+/* ============ 网格双列 ============ */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+.card-box{
+  background:#161b22;border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;padding:20px;
+}
+.card-box .card-header{
+  font-size:.85rem;font-weight:700;color:rgba(255,255,255,.7);
+  margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.card-box .see-all{font-size:.75rem;color:#e94560;cursor:pointer;text-decoration:none}
+.card-box .see-all:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M20 70 L50 30 L80 70" stroke="#fff" stroke-width="10" stroke-linecap="round"/><circle cx="50" cy="30" r="8" fill="#fff"/></svg>
+    </div>
+    <div class="logo-text">熠达<span>通</span></div>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-date" id="topbarDate"></div>
+    <div class="topbar-badge">🔥 工作台</div>
+    <div class="user-avatar">方</div>
+  </div>
+</div>
+
+<!-- 主体 -->
+<div class="layout">
+
+  <!-- 左侧边栏 -->
+  <div class="sidebar">
+    <div class="sidebar-nav">
+      <div class="nav-item active" onclick="switchPage('home')">
+        <span class="icon">🏠</span>工作台首页
+      </div>
+      <div class="nav-item" onclick="switchPage('bidinfo')">
+        <span class="icon">🔍</span>招标信息
+        <span class="nav-badge" style="margin-left:auto;background:#e94560;color:#fff;font-size:.65rem;padding:2px 7px;border-radius:10px;font-weight:700" id="bidCount">0</span>
+      </div>
+      <div class="nav-item" onclick="switchPage('project')">
+        <span class="icon">📋</span>项目管理
+      </div>
+      <div class="nav-item" onclick="switchPage('document')">
+        <span class="icon">📄</span>制作标书
+      </div>
+      <div class="nav-divider"></div>
+      <div class="nav-item" onclick="switchPage('platform')">
+        <span class="icon">🚀</span>接单平台
+      </div>
+      <div class="nav-divider"></div>
+      <div class="nav-item" onclick="loadDailyBids()">
+        <span class="icon">🔄</span>同步数据
+      </div>
+      <div class="nav-item" onclick="alert('帮助文档开发中...')">
+        <span class="icon">❓</span>使用帮助
+      </div>
+    </div>
+    <!-- 底部状态 -->
+    <div style="padding:16px;border-top:1px solid rgba(255,255,255,.05)">
+      <div style="font-size:.75rem;color:rgba(255,255,255,.3);margin-bottom:8px">
+        <span class="status-dot"></span>系统运行正常
+      </div>
+      <div style="font-size:.7rem;color:rgba(255,255,255,.2)">熠达通 v2.0</div>
+    </div>
+  </div>
+
+  <!-- 主内容 -->
+  <div class="main" id="mainContent">
+    <!-- 首页内容 -->
+    <div id="page-home">
+      <!-- 欢迎横幅 -->
+      <div class="hero-banner">
+        <div class="hero-greeting" id="greeting">早上好，创业者</div>
+        <div class="hero-title">招投标工作台已就绪 💪</div>
+        <div class="hero-subtitle">信息 → 项目 → 标书 → 投标，闭环工作流</div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="val" id="heroBids">0</span><span class="lab">今日招标</span></div>
+          <div class="hero-stat"><span class="val" id="heroProjects">0</span><span class="lab">进行中项目</span></div>
+          <div class="hero-stat"><span class="val" id="heroProgress">0</span><span class="lab">工作流进度</span></div>
+        </div>
+      </div>
+
+      <!-- 五阶段工作流 -->
+      <div class="section-title">📊 工作流五阶段</div>
+      <div class="workflow-stages">
+        <div class="stage-card active" onclick="switchPage('bidinfo')">
+          <span class="stage-badge">1</span>
+          <div class="stage-icon">🔍</div>
+          <div class="stage-name">信息收集</div>
+          <div class="stage-count">每日自动抓取</div>
+        </div>
+        <div class="stage-card" onclick="switchPage('project')">
+          <span class="stage-badge">2</span>
+          <div class="stage-icon">📋</div>
+          <div class="stage-name">项目建立</div>
+          <div class="stage-count">创建投标项目</div>
+        </div>
+        <div class="stage-card" onclick="switchPage('document')">
+          <span class="stage-badge">3</span>
+          <div class="stage-icon">📝</div>
+          <div class="stage-name">标书制作</div>
+          <div class="stage-count">AI辅助撰写</div>
+        </div>
+        <div class="stage-card">
+          <span class="stage-badge">4</span>
+          <div class="stage-icon">✅</div>
+          <div class="stage-name">投标提交</div>
+          <div class="stage-count">提交前检查</div>
+        </div>
+        <div class="stage-card">
+          <span class="stage-badge">5</span>
+          <div class="stage-icon">🏆</div>
+          <div class="stage-name">中标跟进</div>
+          <div class="stage-count">结果追踪</div>
+        </div>
+      </div>
+
+      <!-- 快捷操作 -->
+      <div class="section-title">⚡ 快捷操作</div>
+      <div class="quick-actions">
+        <a href="bidinfo.html" class="quick-btn">
+          <span class="q-icon">🔍</span>
+          <span class="q-label">招标信息</span>
+          <span class="q-sub">查看最新商机</span>
+        </a>
+        <a href="project.html" class="quick-btn">
+          <span class="q-icon">📋</span>
+          <span class="q-label">新建项目</span>
+          <span class="q-sub">从招标创建</span>
+        </a>
+        <a href="document.html" class="quick-btn">
+          <span class="q-icon">📄</span>
+          <span class="q-label">制作标书</span>
+          <span class="q-sub">AI智能生成</span>
+        </a>
+        <a href="my-platforms.html" class="quick-btn">
+          <span class="q-icon">🚀</span>
+          <span class="q-label">接单平台</span>
+          <span class="q-sub">多平台展示</span>
+        </a>
+      </div>
+
+      <!-- 双列卡片 -->
+      <div class="grid-2">
+        <!-- 项目列表 -->
+        <div class="card-box">
+          <div class="card-header">
+            📋 进行中项目
+            <a href="project.html" class="see-all">查看全部 →</a>
+          </div>
+          <div class="project-list" id="projectList">
+            <div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);font-size:.85rem">
+              暂无项目，<a href="bidinfo.html" style="color:#e94560;text-decoration:none">从招标信息创建</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 紧急招标 -->
+        <div class="card-box">
+          <div class="card-header">
+            🚨 紧急招标（7天内截止）
+            <a href="bidinfo.html" class="see-all">查看全部 →</a>
+          </div>
+          <div class="bid-list" id="urgentBidList"></div>
+        </div>
+      </div>
+
+      <!-- 底部状态 -->
+      <div class="status-bar">
+        <span>🔗 数据来源：千里马 · 政府采购网 · 四川公共资源 · 西南产权交易所</span>
+        <span id="dataStatus">数据更新时间：—</span>
+      </div>
+    </div>
+
+    <!-- 招标信息页 -->
+    <div id="page-bidinfo" style="display:none">
+      <iframe src="bidinfo.html" style="width:100%;height:calc(100vh - 88px);border:none;border-radius:12px" id="iframe-bidinfo"></iframe>
+    </div>
+
+    <!-- 项目管理页 -->
+    <div id="page-project" style="display:none">
+      <iframe src="project.html" style="width:100%;height:calc(100vh - 88px);border:none;border-radius:12px" id="iframe-project"></iframe>
+    </div>
+
+    <!-- 标书制作页 -->
+    <div id="page-document" style="display:none">
+      <iframe src="document.html" style="width:100%;height:calc(100vh - 88px);border:none;border-radius:12px" id="iframe-document"></iframe>
+    </div>
+
+    <!-- 接单平台页 -->
+    <div id="page-platform" style="display:none">
+      <iframe src="my-platforms.html" style="width:100%;height:calc(100vh - 88px);border:none;border-radius:12px" id="iframe-platform"></iframe>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// 问候语
+function updateGreeting() {
+  const h = new Date().getHours();
+  let g = '晚上好';
+  if (h < 12) g = '早上好';
+  else if (h < 18) g = '下午好';
+  document.getElementById('greeting').textContent = g + '，创业者 💪';
+}
+updateGreeting();
+
+// 日期
+function updateDate() {
+  const d = new Date();
+  const opts = {year:'numeric',month:'long',day:'numeric',weekday:'long'};
+  document.getElementById('topbarDate').textContent = d.toLocaleDateString('zh-CN', opts);
+}
+updateDate();
+
+// 加载招标数据
+function loadDailyBids() {
+  fetch('daily-bids.json?t=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById('dataStatus').textContent = '数据更新时间：' + data.date;
+      renderUrgentBids(data.bids || []);
+    })
+    .catch(() => {
+      // 使用示例数据
+      document.getElementById('dataStatus').textContent = '示例数据（同步数据后可更新）';
+      renderUrgentBids(getSampleBids());
+    });
+}
+
+// 示例数据
+function getSampleBids() {
+  return [
+    {id:1,title:'2026成都国际汽车展览会特装展台设计搭建项目',money:'80-120',area:'成都',method:'比选',days:3,source:'千里马',url:'#',isHot:true,isMatch:true},
+    {id:2,title:'四川省科学健身"坝坝会"服务供应商采购比选',money:'20-30',area:'成都',method:'比选',days:5,source:'四川公共资源',url:'#',isMatch:true},
+    {id:3,title:'第二十届中国西部国际博览会展台搭建公开比选',money:'120-180',area:'成都',method:'比选',days:7,source:'政府采购',url:'#',isHot:true,isMatch:true},
+    {id:4,title:'成都迪格展览展示常年供应商入库征集公告',money:'入库',area:'成都',method:'询价',days:10,source:'千里马',url:'#'},
+    {id:5,title:'西南地区各类活动策划、舞美搭建常年供应商征集',money:'待确认',area:'成都',method:'询价',days:12,source:'西南产权',url:'#',isMatch:true},
+    {id:6,title:'2026重庆国际智能产业博览会特装展位设计搭建',money:'150-200',area:'重庆',method:'竞争性磋商',days:6,source:'千里马',url:'#',isMatch:true},
+    {id:7,title:'某省运会开闭幕式舞台搭建、灯光音响服务采购',money:'200+',area:'重庆',method:'公开招标',days:15,source:'政府采购',url:'#',isHot:true,isMatch:true},
+    {id:8,title:'国家税务总局某省分局会议室改造设计施工项目',money:'50-80',area:'北京',method:'比选',days:4,source:'政府采购',url:'#',isMatch:true},
+    {id:9,title:'某知名车企全国经销商年会活动策划执行供应商招标',money:'100-150',area:'上海',method:'招标',days:8,source:'千里马',url:'#',isHot:true},
+    {id:10,title:'昆明南亚博览会东南亚主题展馆设计施工一体化',money:'60-80',area:'昆明',method:'比选',days:9,source:'政府采购',url:'#'},
+  ];
+}
+
+function renderUrgentBids(bids) {
+  const urgent = bids.filter(b => (b.days || 99) <= 15).slice(0, 5);
+  const list = document.getElementById('urgentBidList');
+  
+  if (urgent.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);font-size:.85rem">暂无紧急招标</div>';
+    return;
+  }
+  
+  list.innerHTML = urgent.map(b => {
+    const color = b.days <= 3 ? '#dc2626' : b.days <= 7 ? '#e94560' : '#d4a574';
+    return '<div class="bid-item">' +
+      '<div class="bid-item-l" style="background:' + color + '"></div>' +
+      '<div class="bid-item-info">' +
+        '<div class="bid-item-title">' + b.title + '</div>' +
+        '<div class="bid-item-meta">' + b.area + ' · ' + b.method + ' · ' + b.source + '</div>' +
+      '</div>' +
+      '<div class="bid-item-money">' + b.money + '万</div>' +
+      '<div class="bid-item-days">' + b.days + '天后截止</div>' +
+    '</div>';
+  }).join('');
+  
+  document.getElementById('bidCount').textContent = bids.length;
+  document.getElementById('heroBids').textContent = bids.length;
+}
+
+// 加载项目
+function loadProjects() {
+  const projects = JSON.parse(localStorage.getItem('yidatong_projects') || '[]');
+  const list = document.getElementById('projectList');
+  document.getElementById('heroProjects').textContent = projects.length;
+  
+  if (projects.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:30px;color:rgba(255,255,255,.3);font-size:.85rem">暂无项目，<a href="bidinfo.html" style="color:#e94560;text-decoration:none">从招标信息创建</a></div>';
+    return;
+  }
+  
+  const statusColor = {in_progress:'#e94560',review:'#f59e0b',submitted:'#3b82f6',won:'#10b981',lost:'#6b7280'};
+  const statusText = {in_progress:'进行中',review:'审核中',submitted:'已提交',won:'已中标',lost:'未中标'};
+  
+  list.innerHTML = projects.slice(0, 5).map(p => {
+    const sc = statusColor[p.status] || '#e94560';
+    const st = statusText[p.status] || '进行中';
+    return '<div class="project-item">' +
+      '<div class="project-dot" style="background:' + sc + '"></div>' +
+      '<div class="project-info">' +
+        '<div class="project-name">' + p.name + '</div>' +
+        '<div class="project-meta">' + (p.client || '客户待定') + ' · ' + (p.budget || '—') + '万</div>' +
+      '</div>' +
+      '<div class="project-progress"><div class="project-progress-bar" style="width:' + (p.progress || 10) + '%"></div></div>' +
+      '<div class="project-status" style="background:' + sc + '20;color:' + sc + '">' + st + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// 切换页面
+function switchPage(page) {
+  // 更新侧边栏
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const navMap = {home:'工作台首页',bidinfo:'招标信息',project:'项目管理',document:'制作标书',platform:'接单平台'};
+  document.querySelectorAll('.nav-item').forEach(el => {
+    if (navMap[page] && el.textContent.trim().startsWith(navMap[page].replace('工作台首页','🏠').replace('招标信息','🔍').replace('项目管理','📋').replace('制作标书','📄').replace('接单平台','🚀'))) {
+      el.classList.add('active');
+    }
+  });
+  // 显示对应页面
+  ['home','bidinfo','project','document','platform'].forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.style.display = p === page ? 'block' : 'none';
+  });
+  // 更新进度
+  const progress = {home:0,bidinfo:20,project:40,document:60,platform:80};
+  document.getElementById('heroProgress').textContent = (progress[page] || 0) + '%';
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+  loadDailyBids();
+  loadProjects();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熠达通 LOGO设计</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .logo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .logo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .logo-card.selected {
+            border: 3px solid #e94560;
+            box-shadow: 0 0 0 5px rgba(233,69,96,0.2);
+        }
+        .logo-preview {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+            position: relative;
+        }
+        .logo-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+        }
+        .logo-desc {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .size-variants {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .size-variant {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .size-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .size-label {
+            font-size: 0.7rem;
+            color: #9ca3af;
+        }
+        .color-variants {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .color-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .color-btn:hover {
+            transform: scale(1.2);
+        }
+        .actions {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .actions h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(233,69,96,0.3);
+        }
+        .btn-secondary {
+            background: white;
+            color: #1a1a2e;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .btn-secondary:hover {
+            border-color: #e94560;
+            color: #e94560;
+        }
+        .concept-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .concept-section h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        .concept-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .concept-item {
+            padding: 1rem;
+            background: #faf8f5;
+            border-radius: 10px;
+            border-left: 3px solid #e94560;
+        }
+        .concept-title {
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.25rem;
+        }
+        .concept-desc {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 熠达通 LOGO 设计方案</h1>
+        
+        <div class="logo-grid">
+            <!-- 方案1：字母Y+建筑线条 -->
+            <div class="logo-card" onclick="selectLogo(1, this)">
+                <div class="logo-preview" style="background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <path d="M20 80 L50 30 L80 80" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M35 55 L65 55" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                        <rect x="15" y="75" width="70" height="8" rx="2" fill="white" opacity="0.3"/>
+                    </svg>
+                </div>
+                <div class="logo-name">方案一：建筑之巅</div>
+                <div class="logo-desc">Y字母+展台造型，象征展览行业向上发展</div>
+                <div class="size-variants">
+                    <div class="size-variant">
+                        <div class="size-icon" style="width:48px;height:48px;background:linear-gradient(135deg,#e94560,#ff6b6b);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="32" height="32" viewBox="0 0 100 100">
+                                <path d="M20 80 L50 30 L80 80" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+                                <path d="M35 55 L65 55" stroke="white" stroke-width="6"/>
+                            </svg>
+                        </div>
+                        <span class="size-label">48px</span>
+                    </div>
+                    <div class="size-variant">
+                        <div class="size-icon" style="width:32px;height:32px;background:linear-gradient(135deg,#e94560,#ff6b6b);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="20" height="20" viewBox="0 0 100 100">
+                                <path d="M20 80 L50 30 L80 80" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="size-label">32px</span>
+                    </div>
+                    <div class="size-variant">
+                        <div class="size-icon" style="width:16px;height:16px;background:linear-gradient(135deg,#e94560,#ff6b6b);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="10" height="10" viewBox="0 0 100 100">
+                                <path d="M20 80 L50 30 L80 80" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="size-label">16px</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方案2：六边形+线条 -->
+            <div class="logo-card" onclick="selectLogo(2, this)">
+                <div class="logo-preview" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="none" stroke="#e94560" stroke-width="4"/>
+                        <path d="M35 65 L50 35 L65 65" stroke="#d4a574" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M42 52 L58 52" stroke="#d4a574" stroke-width="4"/>
+                    </svg>
+                </div>
+                <div class="logo-name">方案二：六边展台</div>
+                <div class="logo-desc">六边形+Y字母，稳定专业，科技感强</div>
+                <div class="color-variants">
+                    <div class="color-btn" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div>
+                    <div class="color-btn" style="background: linear-gradient(135deg, #e94560, #ff6b6b);"></div>
+                    <div class="color-btn" style="background: linear-gradient(135deg, #d4a574, #c49a6c);"></div>
+                </div>
+            </div>
+
+            <!-- 方案3：圆形+展台 -->
+            <div class="logo-card" onclick="selectLogo(3, this)">
+                <div class="logo-preview" style="background: linear-gradient(135deg, #d4a574 0%, #c49a6c 100%);">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="3"/>
+                        <path d="M30 70 L50 30 L70 70" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M40 50 L60 50" stroke="white" stroke-width="4"/>
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="white" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div class="logo-name">方案三：金辉之巅</div>
+                <div class="logo-desc">圆形+Y字母，高端大气，金色代表品质</div>
+                <div class="color-variants">
+                    <div class="color-btn" style="background: linear-gradient(135deg, #d4a574, #c49a6c);"></div>
+                    <div class="color-btn" style="background: linear-gradient(135deg, #e94560, #ff6b6b);"></div>
+                    <div class="color-btn" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div>
+                </div>
+            </div>
+
+            <!-- 方案4：几何组合 -->
+            <div class="logo-card" onclick="selectLogo(4, this)">
+                <div class="logo-preview" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <rect x="20" y="60" width="60" height="15" rx="3" fill="white" opacity="0.3"/>
+                        <rect x="25" y="45" width="50" height="12" rx="2" fill="white" opacity="0.5"/>
+                        <rect x="30" y="30" width="40" height="10" rx="2" fill="white" opacity="0.7"/>
+                        <polygon points="50,15 65,28 35,28" fill="white"/>
+                    </svg>
+                </div>
+                <div class="logo-name">方案四：层级展台</div>
+                <div class="logo-desc">层叠几何体，象征展台搭建的专业性</div>
+                <div class="color-variants">
+                    <div class="color-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);"></div>
+                    <div class="color-btn" style="background: linear-gradient(135deg, #e94560, #ff6b6b);"></div>
+                    <div class="color-btn" style="background: linear-gradient(135deg, #10b981, #059669);"></div>
+                </div>
+            </div>
+
+            <!-- 方案5：极简Y -->
+            <div class="logo-card selected" onclick="selectLogo(5, this)">
+                <div class="logo-preview" style="background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <path d="M25 75 L50 40 L75 75" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="40" r="6" fill="white"/>
+                        <circle cx="25" cy="75" r="4" fill="white" opacity="0.6"/>
+                        <circle cx="75" cy="75" r="4" fill="white" opacity="0.6"/>
+                    </svg>
+                </div>
+                <div class="logo-name">方案五：极简Y【推荐】</div>
+                <div class="logo-desc">简洁大气，Y字母代表"熠达"，圆点象征连接</div>
+                <div class="size-variants">
+                    <div class="size-variant">
+                        <div class="size-icon" style="width:48px;height:48px;background:linear-gradient(135deg,#e94560,#ff6b6b);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="32" height="32" viewBox="0 0 100 100">
+                                <path d="M25 75 L50 40 L75 75" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+                                <circle cx="50" cy="40" r="8" fill="white"/>
+                            </svg>
+                        </div>
+                        <span class="size-label">48px</span>
+                    </div>
+                    <div class="size-variant">
+                        <div class="size-icon" style="width:32px;height:32px;background:linear-gradient(135deg,#e94560,#ff6b6b);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="20" height="20" viewBox="0 0 100 100">
+                                <path d="M25 75 L50 40 L75 75" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="size-label">32px</span>
+                    </div>
+                    <div class="size-variant">
+                        <div class="size-icon" style="width:16px;height:16px;background:linear-gradient(135deg,#e94560,#ff6b6b);border-radius:4px;"></div>
+                        <span class="size-label">16px</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方案6：文字LOGO -->
+            <div class="logo-card" onclick="selectLogo(6, this)">
+                <div class="logo-preview" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 16px;">
+                    <svg width="100" height="60" viewBox="0 0 150 60">
+                        <text x="75" y="42" font-family="Arial Black, sans-serif" font-size="32" font-weight="bold" fill="#e94560" text-anchor="middle">熠达</text>
+                        <text x="75" y="58" font-family="Arial, sans-serif" font-size="12" fill="#d4a574" text-anchor="middle" letter-spacing="8">通</text>
+                    </svg>
+                </div>
+                <div class="logo-name">方案六：文字标识</div>
+                <div class="logo-desc">纯文字设计，品牌感强，易识别</div>
+            </div>
+        </div>
+
+        <div class="concept-section">
+            <h2>💡 设计理念</h2>
+            <div class="concept-list">
+                <div class="concept-item">
+                    <div class="concept-title">Y字母</div>
+                    <div class="concept-desc">代表"熠达"，Y形也象征展台结构</div>
+                </div>
+                <div class="concept-item">
+                    <div class="concept-title">红色主色</div>
+                    <div class="concept-desc">活力、热情、专业，符合招投标行业特点</div>
+                </div>
+                <div class="concept-item">
+                    <div class="concept-title">金色点缀</div>
+                    <div class="concept-desc">高端、品质、成功，代表中标和胜利</div>
+                </div>
+                <div class="concept-item">
+                    <div class="concept-title">几何图形</div>
+                    <div class="concept-desc">现代、简洁、专业，体现设计行业属性</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <h2>📥 导出LOGO</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="downloadSVG()">下载 SVG 矢量图</button>
+                <button class="btn btn-secondary" onclick="downloadPNG()">下载 PNG 高清图</button>
+                <button class="btn btn-secondary" onclick="copyToApp()">应用到应用</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedLogo = 5;
+
+        function selectLogo(num, el) {
+            selectedLogo = num;
+            document.querySelectorAll('.logo-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            el.classList.add('selected');
+        }
+
+        function downloadSVG() {
+            const logos = {
+                5: `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 100 100">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e94560"/>
+                            <stop offset="100%" style="stop-color:#ff6b6b"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="100" height="100" rx="20" fill="url(#grad)"/>
+                    <path d="M25 75 L50 40 L75 75" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="40" r="6" fill="white"/>
+                    <circle cx="25" cy="75" r="4" fill="white" opacity="0.6"/>
+                    <circle cx="75" cy="75" r="4" fill="white" opacity="0.6"/>
+                </svg>`
+            };
+            
+            const blob = new Blob([logos[selectedLogo]], {type: 'image/svg+xml'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '熠达通-LOGO.svg';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadPNG() {
+            alert('PNG导出功能开发中...\n\n暂时请使用SVG格式，可在浏览器中打开后另存为PNG');
+        }
+
+        function copyToApp() {
+            const logos = {
+                5: `<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 100 100">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e94560"/>
+                            <stop offset="100%" style="stop-color:#ff6b6b"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="100" height="100" rx="20" fill="url(#grad)"/>
+                    <path d="M25 75 L50 40 L75 75" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="40" r="6" fill="white"/>
+                    <circle cx="25" cy="75" r="4" fill="white" opacity="0.6"/>
+                    <circle cx="75" cy="75" r="4" fill="white" opacity="0.6"/>
+                </svg>`
+            };
+            
+            // 保存到文件
+            const fs = require('fs');
+            const path = 'C:\\Users\\apple\\.qclaw\\workspace\\bid-workflow-app\\logo.svg';
+            fs.writeFileSync(path, logos[selectedLogo]);
+            alert('✅ LOGO已应用到应用！\n\n文件保存位置：' + path);
+        }
+    </script>
+</body>
+</html>

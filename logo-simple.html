@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熠达通 LOGO - 简洁版</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .logo-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .logo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .logo-card.selected {
+            border-color: #e94560;
+        }
+        .logo-preview {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+        .logo-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.25rem;
+        }
+        .logo-desc {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .preview-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+        }
+        .preview-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .preview-label {
+            font-size: 0.7rem;
+            color: #999;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: #e94560;
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #d63d56;
+        }
+        .btn-secondary {
+            background: white;
+            color: #1a1a2e;
+            border: 1px solid #ddd;
+        }
+        .btn-secondary:hover {
+            border-color: #e94560;
+            color: #e94560;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YD 字母融合 - 极简版</h1>
+        
+        <div class="logo-grid">
+            <!-- 方案1：极简YD -->
+            <div class="logo-card selected" onclick="selectLogo(1, this)">
+                <div class="logo-preview" style="background: #e94560;">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <!-- Y -->
+                        <path d="M20 75 L40 40 L60 75" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- D -->
+                        <path d="M60 25 L60 75 Q 85 50, 60 25" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-name">极简YD</div>
+                <div class="logo-desc">最简洁，Y+D基本形</div>
+                <div class="preview-row">
+                    <div class="preview-item">
+                        <div style="width:48px;height:48px;background:#e94560;border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="30" height="30" viewBox="0 0 100 100">
+                                <path d="M20 75 L40 40 L60 75" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+                                <path d="M60 25 L60 75 Q 85 50, 60 25" stroke="white" stroke-width="12" fill="none"/>
+                            </svg>
+                        </div>
+                        <span class="preview-label">48px</span>
+                    </div>
+                    <div class="preview-item">
+                        <div style="width:32px;height:32px;background:#e94560;border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                            <svg width="20" height="20" viewBox="0 0 100 100">
+                                <path d="M20 75 L40 40 L60 75" stroke="white" stroke-width="14" fill="none" stroke-linecap="round"/>
+                                <path d="M60 25 L60 75" stroke="white" stroke-width="14"/>
+                            </svg>
+                        </div>
+                        <span class="preview-label">32px</span>
+                    </div>
+                    <div class="preview-item">
+                        <div style="width:16px;height:16px;background:#e94560;border-radius:4px;"></div>
+                        <span class="preview-label">16px</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方案2：YD相连 -->
+            <div class="logo-card" onclick="selectLogo(2, this)">
+                <div class="logo-preview" style="background: #e94560;">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <!-- YD一笔画 -->
+                        <path d="M20 75 L40 40 L60 75 M40 40 L60 40 L60 75 Q 80 55, 60 40" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-name">一笔YD</div>
+                <div class="logo-desc">连续线条，流畅自然</div>
+            </div>
+
+            <!-- 方案3：YD重叠 -->
+            <div class="logo-card" onclick="selectLogo(3, this)">
+                <div class="logo-preview" style="background: #1a1a2e;">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <!-- Y -->
+                        <path d="M25 75 L50 35 L75 75" stroke="#e94560" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- D -->
+                        <path d="M50 25 L50 75 Q 80 50, 50 25" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="logo-name">YD重叠</div>
+                <div class="logo-desc">Y穿过D，层次感强</div>
+            </div>
+
+            <!-- 方案4：圆形YD -->
+            <div class="logo-card" onclick="selectLogo(4, this)">
+                <div class="logo-preview" style="background: #e94560; border-radius: 50%;">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <path d="M25 70 L50 35 L75 70" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        <path d="M50 35 L50 60 Q 70 60, 50 35" stroke="white" stroke-width="8" fill="none"/>
+                    </svg>
+                </div>
+                <div class="logo-name">圆形YD</div>
+                <div class="logo-desc">圆形容器，更柔和</div>
+            </div>
+
+            <!-- 方案5：黑底白字 -->
+            <div class="logo-card" onclick="selectLogo(5, this)">
+                <div class="logo-preview" style="background: #000;">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <path d="M20 75 L40 40 L60 75" stroke="#e94560" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        <path d="M60 25 L60 75 Q 85 50, 60 25" stroke="white" stroke-width="10" fill="none"/>
+                    </svg>
+                </div>
+                <div class="logo-name">黑底YD</div>
+                <div class="logo-desc">黑底配色，对比强烈</div>
+            </div>
+
+            <!-- 方案6：纯线YD -->
+            <div class="logo-card" onclick="selectLogo(6, this)">
+                <div class="logo-preview" style="background: white; border: 1px solid #eee;">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <path d="M20 75 L40 40 L60 75" stroke="#e94560" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        <path d="M60 25 L60 75 Q 85 50, 60 25" stroke="#e94560" stroke-width="10" fill="none"/>
+                    </svg>
+                </div>
+                <div class="logo-name">纯线YD</div>
+                <div class="logo-desc">无背景，最简洁</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" onclick="applyLogo()">✅ 应用</button>
+            <button class="btn btn-secondary" onclick="alert('开发中...')">下载</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedLogo = 1;
+        function selectLogo(num, el) {
+            selectedLogo = num;
+            document.querySelectorAll('.logo-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+        function applyLogo() {
+            alert('✅ 已选择方案' + selectedLogo);
+        }
+    </script>
+</body>
+</html>
