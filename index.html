@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>熠达通 - 招投标工作台</title>
+<script src="auth-check.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#0d1117;color:#e6edf3;height:100vh;overflow:hidden}
@@ -215,7 +216,7 @@ body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#0d1117;c
   <div class="topbar-right">
     <div class="topbar-date" id="topbarDate"></div>
     <div class="topbar-badge">🔥 工作台</div>
-    <div class="user-avatar">方</div>
+    <div class="user-avatar" id="userAvatar" onclick="YidaTongAuth.logout()" style="cursor:pointer" title="点击登出">方</div>
   </div>
 </div>
 
@@ -517,6 +518,31 @@ function switchPage(page) {
 
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
+  // 检查登录
+  const user = YidaTongAuth.checkLogin();
+  if (user) {
+    // 更新问候语显示用户名
+    const h = new Date().getHours();
+    let g = '晚上好';
+    if (h < 12) g = '早上好';
+    else if (h < 18) g = '下午好';
+    document.getElementById('greeting').textContent = g + '，' + user.name + ' 💪';
+    // 更新头像显示姓氏
+    const avatar = document.getElementById('userAvatar');
+    if (avatar && user.name) {
+      avatar.textContent = user.name.charAt(0);
+      avatar.title = user.name + '（点击登出）' + (user.isPaid ? ' [付费用户]' : ' [免费用户]');
+    }
+    // 免费用户显示升级提示
+    if (!user.isPaid) {
+      const badge = document.querySelector('.topbar-badge');
+      if (badge) {
+        badge.textContent = '⭐ 免费版';
+        badge.style.cursor = 'pointer';
+        badge.onclick = function() { YidaTongAuth.showUpgradeTip(); };
+      }
+    }
+  }
   loadDailyBids();
   loadProjects();
 });

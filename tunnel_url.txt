@@ -1,2 +1,0 @@
-[32mForwarding HTTP traffic from https://1b473d566336933d-117-176-135-123.serveousercontent.com
-[0m[33mPort forwarding for 1b473d566336933d-117-176-135-123.serveousercontent.com expired

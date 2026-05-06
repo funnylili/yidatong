@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "phone": "13800138000",
+      "name": "测试用户",
+      "password": "123456",
+      "isPaid": false,
+      "createdAt": "2026-05-06",
+      "note": "免费试用用户"
+    },
+    {
+      "phone": "13900139000",
+      "name": "付费用户",
+      "password": "123456",
+      "isPaid": true,
+      "createdAt": "2026-05-06",
+      "paidAt": "2026-05-06",
+      "note": "年费用户"
+    }
+  ],
+  "paidUsers": ["13900139000"],
+  "freeLimit": {
+    "dailyBidViews": 5,
+    "canUseAI": false,
+    "canExport": false
+  }
+}
