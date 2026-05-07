@@ -1,203 +1,56 @@
-{
-  "updateTime": "2026-05-07",
-  "updateTimeZh": "2026/05/07",
-  "total": 8,
-  "keyAnalysis": [
-    {
-      "id": "s1",
-      "title": "成都西博会展台搭建服务采购项目",
-      "money": "80-120万",
-      "region": "成都",
-      "method": "比选",
-      "date": "5月18日",
-      "url": "",
-      "source": "千里马",
-      "businessType": "展台搭建",
-      "score": 88,
-      "deadlineDays": 7,
-      "isHot": true,
-      "isMatch": true
-    },
-    {
-      "id": "s2",
-      "title": "重庆国际汽车展览会特装展位设计搭建",
-      "money": "150-200万",
-      "region": "重庆",
-      "method": "询价",
-      "date": "5月21日",
-      "url": "",
-      "source": "采招网",
-      "businessType": "展览展示",
-      "score": 85,
-      "deadlineDays": 10,
-      "isHot": true,
-      "isMatch": true
-    },
-    {
-      "id": "s3",
-      "title": "四川省文化活动中心舞台舞美设备采购",
-      "money": "60-80万",
-      "region": "成都",
-      "method": "竞价",
-      "date": "5月14日",
-      "url": "",
-      "source": "四川政采",
-      "businessType": "舞台舞美",
-      "score": 82,
-      "deadlineDays": 5,
-      "isHot": false,
-      "isMatch": true
-    },
-    {
-      "id": "s4",
-      "title": "昆明市博览事务局展览展示服务供应商征集",
-      "money": "入库",
-      "region": "昆明",
-      "method": "比选",
-      "date": "5月27日",
-      "url": "",
-      "source": "云南政采",
-      "businessType": "展览展示",
-      "score": 80,
-      "deadlineDays": 14,
-      "isHot": false,
-      "isMatch": true
-    },
-    {
-      "id": "s5",
-      "title": "成都高新区年会活动策划执行服务采购",
-      "money": "30-50万",
-      "region": "成都",
-      "method": "最低价",
-      "date": "5月19日",
-      "url": "",
-      "source": "千里马",
-      "businessType": "活动策划",
-      "score": 78,
-      "deadlineDays": 8,
-      "isHot": false,
-      "isMatch": true
-    }
-  ],
-  "recommended": [
-    {
-      "id": "s1",
-      "title": "成都西博会展台搭建服务采购项目",
-      "money": "80-120万",
-      "region": "成都",
-      "method": "比选",
-      "date": "5月18日",
-      "url": "",
-      "source": "千里马",
-      "businessType": "展台搭建",
-      "score": 88,
-      "deadlineDays": 7,
-      "isHot": true,
-      "isMatch": true
-    },
-    {
-      "id": "s2",
-      "title": "重庆国际汽车展览会特装展位设计搭建",
-      "money": "150-200万",
-      "region": "重庆",
-      "method": "询价",
-      "date": "5月21日",
-      "url": "",
-      "source": "采招网",
-      "businessType": "展览展示",
-      "score": 85,
-      "deadlineDays": 10,
-      "isHot": true,
-      "isMatch": true
-    },
-    {
-      "id": "s3",
-      "title": "四川省文化活动中心舞台舞美设备采购",
-      "money": "60-80万",
-      "region": "成都",
-      "method": "竞价",
-      "date": "5月14日",
-      "url": "",
-      "source": "四川政采",
-      "businessType": "舞台舞美",
-      "score": 82,
-      "deadlineDays": 5,
-      "isHot": false,
-      "isMatch": true
-    }
-  ],
-  "list": [
-    {
-      "id": "s6",
-      "title": "重庆解放碑商圈氛围营造美陈布置项目",
-      "money": "40-60万",
-      "region": "重庆",
-      "method": "比选",
-      "date": "5月25日",
-      "url": "",
-      "source": "重庆政采",
-      "businessType": "氛围营造",
-      "score": 75,
-      "deadlineDays": 12,
-      "isHot": false,
-      "isMatch": true
-    },
-    {
-      "id": "s7",
-      "title": "贵阳国际会议中心标识标牌制作安装",
-      "money": "25-35万",
-      "region": "贵阳",
-      "method": "询价",
-      "date": "5月20日",
-      "url": "",
-      "source": "贵州政采",
-      "businessType": "标志标牌",
-      "score": 72,
-      "deadlineDays": 9,
-      "isHot": false,
-      "isMatch": true
-    },
-    {
-      "id": "s8",
-      "title": "绵阳科技城展厅设计施工一体化项目",
-      "money": "100-150万",
-      "region": "绵阳",
-      "method": "竞价",
-      "date": "5月28日",
-      "url": "",
-      "source": "四川公资",
-      "businessType": "设计搭建",
-      "score": 70,
-      "deadlineDays": 15,
-      "isHot": false,
-      "isMatch": true
-    }
-  ],
-  "stats": {
-    "total": 8,
-    "byRegion": {
-      "成都": 3,
-      "重庆": 2,
-      "昆明": 1,
-      "贵阳": 1,
-      "绵阳": 1
-    },
-    "byMethod": {
-      "比选": 3,
-      "询价": 2,
-      "竞价": 2,
-      "最低价": 1
-    },
-    "bySource": {
-      "千里马": 2,
-      "采招网": 1,
-      "四川政采": 1,
-      "云南政采": 1,
-      "重庆政采": 1,
-      "贵州政采": 1,
-      "四川公资": 1
-    },
-    "hotCount": 2,
-    "matchCount": 8
-  }
+﻿{
+    "bids":  [
+                 {
+                     "source":  "千里马",
+                     "url":  "http://www.qianlima.com/gjxx/374720/index_25.html",
+                     "method":  "比选",
+                     "area":  "四川",
+                     "days":  9,
+                     "isHot":  true,
+                     "isMatch":  true,
+                     "money":  "24",
+                     "title":  "四川展会策划搭建招标采购"
+                 },
+                 {
+                     "url":  "https://www.bidcenter.com.cn/newscontent-13699292-1.html",
+                     "days":  9,
+                     "money":  "待确认",
+                     "title":  "农博会成都展场搭建服务招标公告",
+                     "isMatch":  true,
+                     "method":  "待确认",
+                     "source":  "采招网",
+                     "area":  "四川"
+                 },
+                 {
+                     "source":  "四川广播电视台",
+                     "url":  "https://www.sctv.com/announcement/2019349177071640577",
+                     "method":  "竞争性磋商",
+                     "area":  "四川",
+                     "days":  9,
+                     "isHot":  true,
+                     "isMatch":  true,
+                     "money":  "45",
+                     "title":  "2026年全国两会天府融媒智慧共享空间展陈搭建服务项目"
+                 },
+                 {
+                     "url":  "http://www.qianlima.com/gjxx/60211/index_25.html",
+                     "days":  9,
+                     "money":  "待确认",
+                     "title":  "四川展览设计展台搭建招标采购",
+                     "isMatch":  true,
+                     "method":  "竞价",
+                     "source":  "千里马",
+                     "area":  "四川"
+                 },
+                 {
+                     "url":  "http://www.qianlima.com/gjxx/52318/index_25_0.html",
+                     "source":  "千里马",
+                     "money":  "待确认",
+                     "method":  "待确认",
+                     "days":  9,
+                     "title":  "四川展览设计搭建招标公告",
+                     "area":  "四川"
+                 }
+             ],
+    "date":  "2026-04-28"
 }
