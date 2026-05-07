@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>熠达通 - 招投标工作台</title>
-<script src="auth-check.js"></script>
+<script src="auth-check.js">
+<script src="bid-data.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#0d1117;color:#e6edf3;height:100vh;overflow:hidden}
@@ -412,6 +413,7 @@ updateDate();
 
 // 加载招标数据
 function loadDailyBids() {
+  if (window.BID_DATA) { allBidData = window.BID_DATA; renderDashboard(window.BID_DATA); return; }
   fetch('daily-bids.json?t=' + Date.now())
     .then(r => r.json())
     .then(data => {
